@@ -1,26 +1,26 @@
 package com.br.burguer.modules.category.dto;
 
 import com.br.burguer.modules.category.Category;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CategoryDto {
+public class CategoryDTO {
 
     private Long idCategory;
 
-    @NotNull
+    @NotEmpty
     private String label;
 
-    public static Category toEntity(CategoryDto categoryDto) {
+    public static Category toEntity(CategoryDTO categoryDto) {
         return new Category(
                 categoryDto.idCategory,
                 categoryDto.label
         );
     }
 
-    public static CategoryDto toDto(Category category) {
-        return new CategoryDto(
+    public static CategoryDTO toDto(Category category) {
+        return new CategoryDTO(
                 category.getIdCategory(),
                 category.getLabel()
         );
