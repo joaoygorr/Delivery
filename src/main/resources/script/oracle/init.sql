@@ -8,7 +8,7 @@ CREATE TABLE Product (
     category_id INT,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    price DECIMAL(10, 2) DEFAULT 0,
+    price DECIMAL(10, 2) NOT NULL DEFAULT 0,
     complementary BOOLEAN DEFAULT FALSE,
     url_image VARCHAR(255) NOT NULL
 );
@@ -18,8 +18,8 @@ CREATE TABLE Size (
     product_id INT,
     reference VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    price DECIMAL(10, 2),
-    max_combination INT
+    price DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    max_combination INT NOT NULL
 );
 
 CREATE TABLE ComplementaryCategory (
@@ -89,24 +89,25 @@ INSERT INTO Product (category_id, name, description, price, complementary, url_i
 ((SELECT id_category FROM Category WHERE label = 'SOBREMESAS'), 'SOBREMESA MB', '', 12, FALSE, 'https://i.ytimg.com/vi/9_9YCWc8OEI/maxresdefault.jpg');
 
 -- INSERT Sizes
-INSERT INTO Size (product_id, reference, name, price, max_combination) VALUES
-((SELECT id_product FROM Product WHERE name = 'FOME TIPO-G'), '1', 'BURGER', 34.99, 1),
-((SELECT id_product FROM Product WHERE name = 'MAGIC BURGER'), '1', 'BURGER', 24.99, 1),
-((SELECT id_product FROM Product WHERE name = 'MB O BURGER'), '1', 'BURGER', 24.99, 1),
-((SELECT id_product FROM Product WHERE name = 'MB O JUNIOR'), '1', 'BURGER', 19.9, 1),
-((SELECT id_product FROM Product WHERE name = 'SMASHNOLO'), '1', 'BURGER', 28.99, 1);
+INSERT INTO Size (product_id, name, price, max_combination) VALUES
+((SELECT id_product FROM Product WHERE name = 'FOME TIPO-G'), 'BURGER', 34.99, 1),
+((SELECT id_product FROM Product WHERE name = 'MAGIC BURGER'), 'BURGER', 24.99, 1),
+((SELECT id_product FROM Product WHERE name = 'MB O BURGER'), 'BURGER', 24.99, 1),
+((SELECT id_product FROM Product WHERE name = 'MB O JUNIOR'), 'BURGER', 19.9, 1),
+((SELECT id_product FROM Product WHERE name = 'SMASHNOLO'), 'BURGER', 28.99, 1);
 
 -- INSERT Complementary Categories
 INSERT INTO ComplementaryCategory (size_id, family, name, min, max, max_free, type) VALUES
-((SELECT id_size FROM Size WHERE reference = '1' AND product_id = (SELECT id_product FROM Product WHERE name = 'FOME TIPO-G')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
-((SELECT id_size FROM Size WHERE reference = '1' AND product_id = (SELECT id_product FROM Product WHERE name = 'MAGIC BURGER')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
-((SELECT id_size FROM Size WHERE reference = '1' AND product_id = (SELECT id_product FROM Product WHERE name = 'MB O BURGER')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
-((SELECT id_size FROM Size WHERE reference = '1' AND product_id = (SELECT id_product FROM Product WHERE name = 'MB O JUNIOR')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
-((SELECT id_size FROM Size WHERE reference = '1' AND product_id = (SELECT id_product FROM Product WHERE name = 'SMASHNOLO')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD');
+((SELECT id_size FROM Size WHERE product_id = (SELECT id_product FROM Product WHERE name = 'FOME TIPO-G')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
+((SELECT id_size FROM Size WHERE product_id = (SELECT id_product FROM Product WHERE name = 'MAGIC BURGER')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
+((SELECT id_size FROM Size WHERE product_id = (SELECT id_product FROM Product WHERE name = 'MB O BURGER')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
+((SELECT id_size FROM Size WHERE product_id = (SELECT id_product FROM Product WHERE name = 'MB O JUNIOR')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD'),
+((SELECT id_size FROM Size WHERE product_id = (SELECT id_product FROM Product WHERE name = 'SMASHNOLO')), '1', 'TURBINE SEU BURGER', 0, 0, 0, 'ADD');
 
 -- INSERT Complementary
 INSERT INTO Complementary (complementary_category_id, reference, size, price, name, quantity) VALUES
 ((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1002', NULL, 5, 'BACON -', NULL),
-((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1003', NULL, 3, 'CEBOLA CARAMELIZADA -', NULL),
-((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1001', NULL, 3, 'CREAM CHEESE -', NULL),
-((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1000', NULL, 8, 'HAMBURGUER 180G -', NULL);
+((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1004', NULL, 3, 'CHICKEN -', NULL),
+((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1005', NULL, 0, 'CEBOLA CARAMELIZADA -', NULL),
+((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1007', NULL, 3, 'CHEDDAR -', NULL),
+((SELECT id_complementary_categories FROM ComplementaryCategory WHERE name = 'TURBINE SEU BURGER' AND family = '1' LIMIT 1), '1008', NULL, 0, 'SALADA', NULL);
