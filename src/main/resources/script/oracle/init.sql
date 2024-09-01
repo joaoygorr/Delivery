@@ -1,6 +1,3 @@
--- CREATE SCHEMA
-CREATE SCHEMA burguer;
-
 CREATE TABLE Category (
     id_category SERIAL PRIMARY KEY,
     label VARCHAR(255) NOT NULL
