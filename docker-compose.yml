@@ -1,6 +1,6 @@
 services:
-  db:
-    container_name: postgres_db
+  java_db:
+    container_name: java_db
     restart: always
     image: postgres
 
