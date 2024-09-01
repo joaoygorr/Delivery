@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 
-import java.math.BigDecimal;
-
 @AllArgsConstructor
 public class SizeDTO {
 
@@ -19,9 +17,6 @@ public class SizeDTO {
     private String name;
 
     @NotNull
-    private BigDecimal price;
-
-    @NotNull
     private Integer maxCombination;
 
     public static Size toEntity(SizeDTO sizeDTO) {
@@ -29,7 +24,6 @@ public class SizeDTO {
                 sizeDTO.idSize,
                 sizeDTO.product,
                 sizeDTO.name,
-                sizeDTO.price,
                 sizeDTO.maxCombination
         );
     }
@@ -39,7 +33,6 @@ public class SizeDTO {
                 size.getIdSize(),
                 size.getProduct(),
                 size.getName(),
-                size.getPrice(),
                 size.getMaxCombination()
         );
     }

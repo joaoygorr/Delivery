@@ -25,9 +25,6 @@ public class Size {
 
     private String name;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal price;
-
     @Column(name = "max_combination")
     private Integer maxCombination;
 }
