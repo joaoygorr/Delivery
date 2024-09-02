@@ -19,7 +19,7 @@ public class Size {
     @Column(name = "id_size")
     private Long idSize;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

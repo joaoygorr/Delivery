@@ -18,7 +18,7 @@ public class Product {
     @Column(name = "id_product")
     private Long idProduct;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
