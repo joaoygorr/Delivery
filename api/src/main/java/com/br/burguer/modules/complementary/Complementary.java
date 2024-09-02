@@ -20,7 +20,7 @@ public class Complementary {
     @Column(name = "id_complementary")
     private Long idComplementary;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "size_id", nullable = false)
     private Size size;
 
