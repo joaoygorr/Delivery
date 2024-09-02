@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> getAll(Pageable pageable) {
-        Page<ProductDTO> productDTOS = this.productService.getAllProduct(pageable);
+        Page<ProductDTO> productDTOS = this.productService.getAllProducts(pageable);
         return ResponseEntity.ok(productDTOS);
     }
 }

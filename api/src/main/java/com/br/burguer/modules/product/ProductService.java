@@ -16,7 +16,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<ProductDTO> getAllProduct(Pageable pageable) {
+    public Page<ProductDTO> getAllProducts(Pageable pageable) {
         Page<Product> productPage = this.productRepository.findAll(pageable);
         return productPage.map(ProductDTO::toDto);
     }
