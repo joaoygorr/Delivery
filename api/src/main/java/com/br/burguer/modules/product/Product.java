@@ -2,9 +2,7 @@ package com.br.burguer.modules.product;
 
 import com.br.burguer.modules.category.Category;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -20,7 +18,7 @@ public class Product {
     @Column(name = "id_product")
     private Long idProduct;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
