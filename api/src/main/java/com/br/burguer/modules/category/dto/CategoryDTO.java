@@ -3,7 +3,9 @@ package com.br.burguer.modules.category.dto;
 import com.br.burguer.modules.category.Category;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
 @AllArgsConstructor
 public class CategoryDTO {
 
