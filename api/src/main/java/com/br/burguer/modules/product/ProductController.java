@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/product")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService) {
@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> getAll(Pageable pageable) {
-        Page<ProductDTO> productDTOS = productService.getAllProduct(pageable);
+        Page<ProductDTO> productDTOS = this.productService.getAllProduct(pageable);
         return ResponseEntity.ok(productDTOS);
     }
 }
