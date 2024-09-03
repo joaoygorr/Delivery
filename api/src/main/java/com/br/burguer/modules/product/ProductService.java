@@ -1,5 +1,6 @@
 package com.br.burguer.modules.product;
 
+import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.product.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,4 +22,9 @@ public class ProductService {
         return productPage.map(ProductDTO::toDto);
     }
 
+    public ProductDTO getProductById(Long productId) {
+        Product product = this.productRepository.findById(productId)
+                .orElseThrow(() -> new Exception404("Product with code " + productId + " not found!"));
+        return ProductDTO.toDto(product);
+    }
 }
