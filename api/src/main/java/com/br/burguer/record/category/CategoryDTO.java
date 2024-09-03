@@ -1,4 +1,4 @@
-package com.br.burguer.modules.category.dto;
+package com.br.burguer.record.category;
 
 import com.br.burguer.modules.category.Category;
 import jakarta.validation.constraints.NotEmpty;

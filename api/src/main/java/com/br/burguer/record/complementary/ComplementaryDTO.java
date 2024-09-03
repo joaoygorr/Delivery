@@ -1,4 +1,4 @@
-package com.br.burguer.modules.complementary.dto;
+package com.br.burguer.record.complementary;
 
 import com.br.burguer.modules.complementary.Complementary;
 import com.br.burguer.modules.size.Size;

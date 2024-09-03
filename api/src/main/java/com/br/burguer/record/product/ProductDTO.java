@@ -1,4 +1,4 @@
-package com.br.burguer.modules.product.dto;
+package com.br.burguer.record.product;
 
 import com.br.burguer.modules.category.Category;
 import com.br.burguer.modules.product.Product;

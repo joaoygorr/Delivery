@@ -1,6 +1,6 @@
 package com.br.burguer.controllers;
 
-import com.br.burguer.modules.product.dto.ProductDTO;
+import com.br.burguer.record.product.ProductDTO;
 import com.br.burguer.services.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

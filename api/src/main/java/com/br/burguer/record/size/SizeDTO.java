@@ -1,4 +1,4 @@
-package com.br.burguer.modules.size.dto;
+package com.br.burguer.record.size;
 
 import com.br.burguer.modules.product.Product;
 import com.br.burguer.modules.size.Size;

@@ -1,6 +1,6 @@
 package com.br.burguer.controllers;
 
-import com.br.burguer.modules.complementary.dto.ComplementaryDTO;
+import com.br.burguer.record.complementary.ComplementaryDTO;
 import com.br.burguer.services.complementary.ComplementaryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

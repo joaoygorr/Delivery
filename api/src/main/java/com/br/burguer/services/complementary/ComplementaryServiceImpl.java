@@ -3,7 +3,7 @@ package com.br.burguer.services.complementary;
 import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.complementary.Complementary;
 import com.br.burguer.modules.complementary.ComplementaryRepository;
-import com.br.burguer.modules.complementary.dto.ComplementaryDTO;
+import com.br.burguer.record.complementary.ComplementaryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

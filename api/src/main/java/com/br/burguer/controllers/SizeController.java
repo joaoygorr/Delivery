@@ -1,6 +1,6 @@
 package com.br.burguer.controllers;
 
-import com.br.burguer.modules.size.dto.SizeDTO;
+import com.br.burguer.record.size.SizeDTO;
 import com.br.burguer.services.size.SizeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

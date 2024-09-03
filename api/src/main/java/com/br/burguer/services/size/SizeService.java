@@ -1,6 +1,6 @@
 package com.br.burguer.services.size;
 
-import com.br.burguer.modules.size.dto.SizeDTO;
+import com.br.burguer.record.size.SizeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

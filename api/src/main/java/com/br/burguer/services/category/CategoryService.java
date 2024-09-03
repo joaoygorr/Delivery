@@ -1,6 +1,6 @@
 package com.br.burguer.services.category;
 
-import com.br.burguer.modules.category.dto.CategoryDTO;
+import com.br.burguer.record.category.CategoryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

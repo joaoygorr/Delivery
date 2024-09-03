@@ -3,7 +3,7 @@ package com.br.burguer.services.category;
 import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.category.Category;
 import com.br.burguer.modules.category.CategoryRepository;
-import com.br.burguer.modules.category.dto.CategoryDTO;
+import com.br.burguer.record.category.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
