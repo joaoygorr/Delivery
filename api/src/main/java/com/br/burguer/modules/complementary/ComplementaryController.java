@@ -1,6 +1,7 @@
 package com.br.burguer.modules.complementary;
 
 import com.br.burguer.modules.complementary.dto.ComplementaryDTO;
+import com.br.burguer.services.complementary.ComplementaryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

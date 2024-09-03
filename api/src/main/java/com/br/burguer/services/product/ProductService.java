@@ -1,6 +1,8 @@
-package com.br.burguer.modules.product;
+package com.br.burguer.services.product;
 
 import com.br.burguer.exceptions.Exception404;
+import com.br.burguer.modules.product.Product;
+import com.br.burguer.modules.product.ProductRepository;
 import com.br.burguer.modules.product.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

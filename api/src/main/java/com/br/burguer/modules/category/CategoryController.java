@@ -1,6 +1,7 @@
 package com.br.burguer.modules.category;
 
 import com.br.burguer.modules.category.dto.CategoryDTO;
+import com.br.burguer.services.category.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
