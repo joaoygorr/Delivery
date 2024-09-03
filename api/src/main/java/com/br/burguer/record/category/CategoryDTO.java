@@ -1,6 +1,6 @@
 package com.br.burguer.record.category;
 
-import com.br.burguer.modules.category.Category;
+import com.br.burguer.modules.Category;
 import jakarta.validation.constraints.NotEmpty;
 
 public record CategoryDTO(Long idCategory, @NotEmpty String label){

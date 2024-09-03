@@ -1,7 +1,7 @@
 package com.br.burguer.record.product;
 
-import com.br.burguer.modules.category.Category;
-import com.br.burguer.modules.product.Product;
+import com.br.burguer.modules.Category;
+import com.br.burguer.modules.Product;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
