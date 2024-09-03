@@ -2,17 +2,8 @@ package com.br.burguer.modules.category.dto;
 
 import com.br.burguer.modules.category.Category;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class CategoryDTO {
-
-    private Long idCategory;
-
-    @NotEmpty
-    private String label;
+public record CategoryDTO(Long idCategory, @NotEmpty String label){
 
     public static Category toEntity(CategoryDTO categoryDto) {
         return new Category(

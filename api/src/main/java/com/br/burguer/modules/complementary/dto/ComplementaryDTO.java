@@ -4,26 +4,11 @@ import com.br.burguer.modules.complementary.Complementary;
 import com.br.burguer.modules.size.Size;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@Data
-public class ComplementaryDTO {
-
-    private Long idComplementary;
-
-    @NotNull
-    private Size size;
-
-    private BigDecimal price;
-
-    @NotEmpty
-    private String name;
-
-    private Integer quantity;
+public record ComplementaryDTO(Long idComplementary, @NotNull Size size,
+                               BigDecimal price, @NotEmpty String name,Integer quantity) {
 
     public static Complementary toEntity(ComplementaryDTO complementaryDTO) {
         return new Complementary(

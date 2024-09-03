@@ -4,31 +4,11 @@ import com.br.burguer.modules.category.Category;
 import com.br.burguer.modules.product.Product;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@Data
-public class ProductDTO {
-
-    private Long idProduct;
-
-    @NotNull
-    private Category category;
-
-    @NotEmpty
-    private String name;
-
-    private String description;
-
-    private BigDecimal price;
-
-    private Boolean complementary;
-
-    @NotEmpty
-    private String urlImage;
+public record ProductDTO(Long idProduct, @NotNull Category category, @NotEmpty String name, String description,
+                         BigDecimal price, Boolean complementary, @NotEmpty String urlImage) {
 
     public static Product toEntity(ProductDTO productDTO) {
         return new Product(

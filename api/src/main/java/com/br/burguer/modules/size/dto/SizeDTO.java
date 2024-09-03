@@ -4,22 +4,8 @@ import com.br.burguer.modules.product.Product;
 import com.br.burguer.modules.size.Size;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class SizeDTO {
-
-    private Long idSize;
-
-    private Product product;
-
-    @NotEmpty
-    private String name;
-
-    @NotNull
-    private Integer maxCombination;
+public record SizeDTO(Long idSize, Product product, @NotEmpty String name, @NotNull Integer maxCombination) {
 
     public static Size toEntity(SizeDTO sizeDTO) {
         return new Size(
