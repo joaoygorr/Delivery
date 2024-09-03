@@ -1,6 +1,8 @@
 package com.br.burguer.modules.size;
 
 import com.br.burguer.modules.size.dto.SizeDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/size")
+@Tag(name = "Size", description = "Size related endpoint")
 public class SizeController {
 
     private final SizeService sizeService;
@@ -21,6 +24,7 @@ public class SizeController {
     }
 
     @GetMapping
+    @Operation(summary = "List all sizes", description = "Returns a list of sizes")
     public ResponseEntity<Page<SizeDTO>> getAll(Pageable pageable) {
         Page<SizeDTO> sizeDTOS = this.sizeService.getAllSizes(pageable);
         return ResponseEntity.ok(sizeDTOS);
