@@ -1,5 +1,6 @@
 package com.br.burguer.modules.category;
 
+import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.category.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,5 +20,11 @@ public class CategoryService {
     public Page<CategoryDTO> getAllCategories(Pageable pageable) {
         Page<Category> categories = this.categoryRepository.findAll(pageable);
         return categories.map(CategoryDTO::toDto);
+    }
+
+    public CategoryDTO getCategoryById(Long categoryId) {
+        Category category = this.categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new Exception404("Category with code " + categoryId + " not found!"));
+        return CategoryDTO.toDto(category);
     }
 }
