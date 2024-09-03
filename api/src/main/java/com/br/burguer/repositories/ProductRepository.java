@@ -1,5 +1,6 @@
-package com.br.burguer.modules.product;
+package com.br.burguer.repositories;
 
+import com.br.burguer.modules.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

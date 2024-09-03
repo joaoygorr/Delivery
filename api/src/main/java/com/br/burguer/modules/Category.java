@@ -1,4 +1,4 @@
-package com.br.burguer.modules.category;
+package com.br.burguer.modules;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.br.burguer.record.complementary;
 
-import com.br.burguer.modules.complementary.Complementary;
-import com.br.burguer.modules.size.Size;
+import com.br.burguer.modules.Complementary;
+import com.br.burguer.modules.Size;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 

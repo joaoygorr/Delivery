@@ -1,6 +1,5 @@
-package com.br.burguer.modules.complementary;
+package com.br.burguer.modules;
 
-import com.br.burguer.modules.size.Size;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

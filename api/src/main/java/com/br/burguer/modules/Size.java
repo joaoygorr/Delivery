@@ -1,12 +1,9 @@
-package com.br.burguer.modules.size;
+package com.br.burguer.modules;
 
-import com.br.burguer.modules.product.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table

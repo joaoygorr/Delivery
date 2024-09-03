@@ -1,6 +1,5 @@
-package com.br.burguer.modules.product;
+package com.br.burguer.modules;
 
-import com.br.burguer.modules.category.Category;
 import jakarta.persistence.*;
 import lombok.*;
 
