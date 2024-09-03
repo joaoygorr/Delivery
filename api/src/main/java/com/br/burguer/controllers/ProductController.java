@@ -1,4 +1,4 @@
-package com.br.burguer.modules.product;
+package com.br.burguer.controllers;
 
 import com.br.burguer.modules.product.dto.ProductDTO;
 import com.br.burguer.services.product.ProductService;

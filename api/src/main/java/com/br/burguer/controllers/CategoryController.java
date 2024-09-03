@@ -1,4 +1,4 @@
-package com.br.burguer.modules.category;
+package com.br.burguer.controllers;
 
 import com.br.burguer.modules.category.dto.CategoryDTO;
 import com.br.burguer.services.category.CategoryService;

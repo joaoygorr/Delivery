@@ -1,4 +1,4 @@
-package com.br.burguer.modules.size;
+package com.br.burguer.controllers;
 
 import com.br.burguer.modules.size.dto.SizeDTO;
 import com.br.burguer.services.size.SizeService;

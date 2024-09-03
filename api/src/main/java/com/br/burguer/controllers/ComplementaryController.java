@@ -1,4 +1,4 @@
-package com.br.burguer.modules.complementary;
+package com.br.burguer.controllers;
 
 import com.br.burguer.modules.complementary.dto.ComplementaryDTO;
 import com.br.burguer.services.complementary.ComplementaryService;
