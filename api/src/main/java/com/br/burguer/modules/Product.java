@@ -18,19 +18,20 @@ public class Product {
     private Long idProduct;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
     private Boolean complementary;
 
-    @Column(name = "url_image")
+    @Column(name = "url_image", nullable = false)
     private String urlImage;
 }

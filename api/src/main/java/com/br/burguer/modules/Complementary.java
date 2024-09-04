@@ -15,16 +15,18 @@ import java.math.BigDecimal;
 public class Complementary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_complementary")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idComplementary;
 
     @ManyToOne
     @JoinColumn(name = "size_id", nullable = false)
     private Size size;
 
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false, length = 100)
     private String name;
 
     private Integer quantity;

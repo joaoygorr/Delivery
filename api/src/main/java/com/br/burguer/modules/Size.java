@@ -17,11 +17,12 @@ public class Size {
     private Long idSize;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "max_combination")
+    @Column(name = "max_combination", nullable = false)
     private Integer maxCombination;
 }
