@@ -1,3 +1,10 @@
+INSERT INTO Category (label) VALUES
+('BURGER''S'),
+('COMBOS MB'),
+('FRITAS MB'),
+('BEBIDAS'),
+('SOBREMESAS');
+
 -- INSERT Produtos
 INSERT INTO Product (category_id, name, description, price, complementary, url_image) VALUES
 ((SELECT id_category FROM Category WHERE label = 'BURGER''S'), 'FOME TIPO-G', 'Pão Australiano, 2 hambúrgueres de 180g, queijo, salada e molho mb', 0, FALSE, 'https://i.imgur.com/SSanzqx.png'),
