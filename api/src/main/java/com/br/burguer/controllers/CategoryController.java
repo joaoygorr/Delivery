@@ -4,14 +4,14 @@ import com.br.burguer.record.category.CategoryDTO;
 import com.br.burguer.services.category.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/category")
@@ -28,14 +28,22 @@ public class CategoryController {
     @GetMapping
     @Operation(summary = "List all categories", description = "Returns a list of categories")
     public ResponseEntity<Page<CategoryDTO>> getAll(Pageable pageable) {
-        Page<CategoryDTO> categoryDTOS = this.categoryService.getAllCategories(pageable);
-        return ResponseEntity.ok(categoryDTOS);
+        Page<CategoryDTO> getCategoryAll = this.categoryService.getAllCategories(pageable);
+        return ResponseEntity.ok(getCategoryAll);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Search a category", description = "Returns a category based on id")
     public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long id) {
-        CategoryDTO categoryDTO = this.categoryService.getCategoryById(id);
-        return ResponseEntity.ok(categoryDTO);
+        CategoryDTO getCategory = this.categoryService.getCategoryById(id);
+        return ResponseEntity.ok(getCategory);
+    }
+
+    @PostMapping
+    @Operation(summary = "Create category", description = "Creating a category")
+    public ResponseEntity<CategoryDTO> postCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
+        CategoryDTO createCategory  = this.categoryService.createCategory(categoryDTO);
+        URI location = URI.create("/categories/" + createCategory.idCategory());
+        return ResponseEntity.created(location).body(createCategory);
     }
 }

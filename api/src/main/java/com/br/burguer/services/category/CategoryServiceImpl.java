@@ -31,4 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new Exception404("Category with code " + categoryId + " not found!"));
         return CategoryDTO.toDto(category);
     }
+
+    @Override
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        Category category = this.categoryRepository.save(CategoryDTO.toEntity(categoryDTO));
+        return CategoryDTO.toDto(category);
+    }
 }

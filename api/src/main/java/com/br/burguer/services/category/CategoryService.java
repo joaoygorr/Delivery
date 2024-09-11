@@ -9,4 +9,6 @@ public interface CategoryService {
     Page<CategoryDTO> getAllCategories(Pageable pageable);
 
     CategoryDTO getCategoryById(Long categoryId);
+
+    CategoryDTO createCategory(CategoryDTO categoryDTO);
 }
