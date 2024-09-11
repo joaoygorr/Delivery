@@ -19,9 +19,9 @@ public class RequestLoggingConfig extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) {
         try {
-            String method = request.getMethod().toUpperCase();
-            String uri = request.getRequestURI();
-            genericFilterBean.info("\"{}\" '{}'", method, uri);
+            String route = request.getRequestURI();
+            String method = request.getMethod();
+            genericFilterBean.info("Route: {} | Method: {} ", method, route);
             filterChain.doFilter(request, response);
         } catch (Exception ex) {
             genericFilterBean.error("Exception: {}", ex.getMessage());
