@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDTO getCategoryById(Long categoryId) {
         Category category = this.categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new Exception404("Category with code " + categoryId + " not found!"));
+                .orElseThrow(() -> new Exception404("Categoria com o id " + categoryId + " não encontrado!"));
         return CategoryDTO.toDto(category);
     }
 
@@ -36,5 +36,14 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         Category category = this.categoryRepository.save(CategoryDTO.toEntity(categoryDTO));
         return CategoryDTO.toDto(category);
+    }
+
+    @Override
+    public void deleteCategoryById(Long id) {
+        if (categoryRepository.existsById(id)) {
+            this.categoryRepository.deleteById(id);
+        } else {
+            throw new Exception404("Categoria com o id " + id + " não encontrado!");
+        }
     }
 }

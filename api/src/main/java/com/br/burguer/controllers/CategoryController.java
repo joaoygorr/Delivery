@@ -20,6 +20,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+
     @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
@@ -45,5 +46,12 @@ public class CategoryController {
         CategoryDTO createCategory  = this.categoryService.createCategory(categoryDTO);
         URI location = URI.create("/categories/" + createCategory.idCategory());
         return ResponseEntity.created(location).body(createCategory);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete category", description = "Delete a category by id")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        this.categoryService.deleteCategoryById(id);
+        return ResponseEntity.noContent().build();
     }
 }
