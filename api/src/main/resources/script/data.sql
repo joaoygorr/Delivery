@@ -1,4 +1,4 @@
-INSERT INTO Category (label) VALUES
+INSERT INTO Category (nome) VALUES
 ('BURGER''S'),
 ('COMBOS MB'),
 ('FRITAS MB'),

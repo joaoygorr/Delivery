@@ -18,5 +18,5 @@ public class Category {
     private Long idCategory;
 
     @Column(nullable = false, length = 100)
-    private String label;
+    private String nome;
 }
