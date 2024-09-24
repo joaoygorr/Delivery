@@ -2,28 +2,22 @@ package com.br.burguer.services.category;
 
 import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.Category;
-import com.br.burguer.modules.Product;
 import com.br.burguer.record.category.CategoryNewDTO;
 import com.br.burguer.repositories.CategoryRepository;
 import com.br.burguer.record.category.CategoryDTO;
-import com.br.burguer.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.productRepository = productRepository;
     }
 
     @Override
