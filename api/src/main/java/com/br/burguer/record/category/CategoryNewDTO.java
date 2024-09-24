@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CategoryNewDTO(@NotBlank(message = "Nome não pode estar vazio") String name) {
 
-
     public static Category toEntity(CategoryNewDTO categoryNewDTO) {
         return new Category(
                 null,
