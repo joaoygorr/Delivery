@@ -8,10 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/category")
@@ -44,8 +43,7 @@ public class CategoryController {
     @Operation(summary = "Create category", description = "Creating a category")
     public ResponseEntity<CategoryDTO> postCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
         CategoryDTO createCategory  = this.categoryService.createCategory(categoryDTO);
-        URI location = URI.create("/categories/" + createCategory.idCategory());
-        return ResponseEntity.created(location).body(createCategory);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCategory);
     }
 
     @DeleteMapping("/{id}")

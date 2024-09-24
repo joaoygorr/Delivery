@@ -2,21 +2,27 @@ package com.br.burguer.services.category;
 
 import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.Category;
+import com.br.burguer.modules.Product;
 import com.br.burguer.repositories.CategoryRepository;
 import com.br.burguer.record.category.CategoryDTO;
+import com.br.burguer.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -34,7 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
-        Category category = this.categoryRepository.save(CategoryDTO.toEntity(categoryDTO));
+        List<Product> products = this.productRepository.findAllById(categoryDTO.idProducts());
+        Category category = this.categoryRepository.save(CategoryDTO.toEntity(categoryDTO, products));
         return CategoryDTO.toDto(category);
     }
 
