@@ -2,12 +2,11 @@ package com.br.burguer.record.category;
 
 import com.br.burguer.modules.Category;
 import com.br.burguer.modules.Product;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
 public record CategoryDTO(Long idCategory,
-                          @NotBlank(message = "Nome não pode vazio") String name,
+                          String name,
                           List<Long> idProducts){
 
     public static Category toEntity(CategoryDTO categoryDto, List<Product> products) {
