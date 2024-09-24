@@ -1,6 +1,7 @@
 package com.br.burguer.controllers;
 
 import com.br.burguer.record.category.CategoryDTO;
+import com.br.burguer.record.category.CategoryNewDTO;
 import com.br.burguer.services.category.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,8 +42,8 @@ public class CategoryController {
 
     @PostMapping
     @Operation(summary = "Create category", description = "Creating a category")
-    public ResponseEntity<CategoryDTO> postCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
-        CategoryDTO createCategory  = this.categoryService.createCategory(categoryDTO);
+    public ResponseEntity<CategoryNewDTO> postCategory(@RequestBody @Valid CategoryNewDTO categoryNewDTO) {
+        CategoryNewDTO createCategory  = this.categoryService.createCategory(categoryNewDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createCategory);
     }
 

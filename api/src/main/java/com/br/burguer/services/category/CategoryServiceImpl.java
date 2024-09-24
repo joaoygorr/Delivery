@@ -3,6 +3,7 @@ package com.br.burguer.services.category;
 import com.br.burguer.exceptions.Exception404;
 import com.br.burguer.modules.Category;
 import com.br.burguer.modules.Product;
+import com.br.burguer.record.category.CategoryNewDTO;
 import com.br.burguer.repositories.CategoryRepository;
 import com.br.burguer.record.category.CategoryDTO;
 import com.br.burguer.repositories.ProductRepository;
@@ -39,10 +40,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
-        List<Product> products = this.productRepository.findAllById(categoryDTO.idProducts());
-        Category category = this.categoryRepository.save(CategoryDTO.toEntity(categoryDTO, products));
-        return CategoryDTO.toDto(category);
+    public CategoryNewDTO createCategory(CategoryNewDTO categoryNewDTO) {
+        Category category = this.categoryRepository.save(CategoryNewDTO.toEntity(categoryNewDTO));
+        return CategoryNewDTO.toDto(category);
     }
 
     @Override
