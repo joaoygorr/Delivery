@@ -11,15 +11,15 @@ services:
       POSTGRES_DB: "delivery"
       POSTGRES_PASSWORD: "SuperPassword@22"
 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: api
-    restart: always
-    ports:
-      - "8080:8080"
-    depends_on:
-      - java_db
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+#  api:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: api
+#    restart: always
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - java_db
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
