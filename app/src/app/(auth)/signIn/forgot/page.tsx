@@ -1,12 +1,5 @@
 "use client";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Link as MuiLink,
-} from "@mui/material";
-import Link from "next/link";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import "./signIn.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +16,7 @@ export default function Page() {
     resolver: zodResolver(createAuthFormSchema),
   });
 
-  function submitLogin(data: authFormData) {
+  function submitForgot(data: authFormData) {
     // TODO: envio do furmolário de login
   }
 
@@ -36,7 +29,7 @@ export default function Page() {
       <Box
         component="form"
         className="box-form-forgot"
-        onSubmit={handleSubmit(submitLogin)}
+        onSubmit={handleSubmit(submitForgot)}
       >
         <TextField
           label="Digite seu e-mail"
@@ -55,12 +48,6 @@ export default function Page() {
         >
           {isLoading ? "Carregando..." : "Entrar"}
         </Button>
-
-        <Box className="box-forgot">
-          <MuiLink href="/login/forgot" variant="body2" component={Link}>
-            Esqueceu sua senha?
-          </MuiLink>
-        </Box>
       </Box>
     </div>
   );
