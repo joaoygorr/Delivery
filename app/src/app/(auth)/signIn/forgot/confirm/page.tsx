@@ -1,6 +1,6 @@
 "use client";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import "./signIn.scss";
+import "./confirm.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import createAuthFormSchema from "@/shared/schemas/authForm";
