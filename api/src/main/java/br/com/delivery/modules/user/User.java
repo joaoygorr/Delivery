@@ -20,7 +20,7 @@ public class User {
     @Column(name = "id_user")
     private Long id;
 
-    private String name;
+    private String userName;
 
     private String email;
 
