@@ -65,7 +65,7 @@ export default function Page() {
           {isLoading ? "Carregando..." : "Entrar"}
         </Button>
 
-        <Box className="box-forgot">
+        <Box className="box-auth-forgot">
           <MuiLink href="/login/forgot" variant="body2" component={Link}>
             Esqueceu sua senha?
           </MuiLink>
