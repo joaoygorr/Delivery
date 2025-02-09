@@ -1,0 +1,54 @@
+package br.com.delivery.services.user;
+
+import br.com.delivery.exceptions.Exception401;
+import br.com.delivery.exceptions.Exception404;
+import br.com.delivery.modules.user.User;
+import br.com.delivery.records.user.ResponseRecord;
+import br.com.delivery.repositories.UserRepository;
+import br.com.delivery.services.auth.TokenService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    private final TokenService tokenService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public ResponseRecord login(User entity) {
+        User user = this.userRepository.findByEmail(entity.getEmail())
+                .orElseThrow(() -> new Exception404("Usuário não encontrado"));
+
+        if (passwordEncoder.matches(entity.getPassword(), user.getPassword())) {
+            String token = this.tokenService.generateToken(user);
+            return new ResponseRecord(user.getUsername(), token);
+        }
+        throw new Exception401("Credenciais inválidas");
+    }
+
+    @Override
+    public ResponseRecord register(User entity) {
+        Optional<User> user = this.userRepository.findByEmail(entity.getEmail());
+
+        if (user.isEmpty()) {
+            User newUser = new User();
+            newUser.setPassword(passwordEncoder.encode(entity.getPassword()));
+            newUser.setEmail(entity.getEmail());
+            newUser.setUserName(entity.getUsername());
+            this.userRepository.save(newUser);
+
+            String token = this.tokenService.generateToken(newUser);
+            return new ResponseRecord(newUser.getUsername(), token);
+        }
+
+        throw new Exception401("Credenciais inválidas");
+    }
+}
