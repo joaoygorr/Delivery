@@ -30,8 +30,7 @@ public class AuthController {
     @Operation(summary = "Authenticate user",
             description = "Perform a user authentication based on the credentials provided and returns an authentication token.")
     public ResponseEntity<ResponseRecord> login(@RequestBody @Valid UserLoginRecord loginRecord) {
-        ResponseRecord user = this.userService.login(userMapper.toEntityLogin(loginRecord));
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(this.userService.login(userMapper.toEntityLogin(loginRecord)));
     }
 
     @PostMapping("/register")
@@ -39,7 +38,7 @@ public class AuthController {
             description = "Create a new user in the system based on the data provided in the request. Returns the details of the registered user."
     )
     public ResponseEntity<ResponseRecord> register(@RequestBody @Valid UserRegisterRecord requestRecord) {
-        ResponseRecord user = this.userService.register(userMapper.toEntityRegister(requestRecord));
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.register(userMapper
+                .toEntityRegister(requestRecord)));
     }
 }

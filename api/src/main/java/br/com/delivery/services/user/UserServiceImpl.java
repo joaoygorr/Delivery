@@ -28,8 +28,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new Exception404("Usuário não encontrado"));
 
         if (passwordEncoder.matches(entity.getPassword(), user.getPassword())) {
-            String token = this.tokenService.generateToken(user);
-            return new ResponseRecord(user.getUsername(), token);
+            return new ResponseRecord(user.getUsername(), this.tokenService.generateToken(user));
         }
         throw new Exception401("Credenciais inválidas");
     }
@@ -39,14 +38,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = this.userRepository.findByEmail(entity.getEmail());
 
         if (user.isEmpty()) {
-            User newUser = new User();
-            newUser.setPassword(passwordEncoder.encode(entity.getPassword()));
-            newUser.setEmail(entity.getEmail());
-            newUser.setUserName(entity.getUsername());
+            User newUser = new User(entity.getUsername(), entity.getEmail(), passwordEncoder.encode(entity.getPassword()));
             this.userRepository.save(newUser);
 
-            String token = this.tokenService.generateToken(newUser);
-            return new ResponseRecord(newUser.getUsername(), token);
+            return new ResponseRecord(newUser.getUsername(), this.tokenService.generateToken(newUser));
         }
 
         throw new Exception401("Credenciais inválidas");

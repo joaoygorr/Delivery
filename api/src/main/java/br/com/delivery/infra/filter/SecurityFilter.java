@@ -30,8 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        String token = this.recoverToken(request);
-        String login = this.tokenService.validateToken(token);
+        String login = this.tokenService.validateToken(this.recoverToken(request));
 
         if (login != null) {
             User user = userRepository.findByEmail(login).orElseThrow(() -> new Exception404("Usuário não encontrado"));

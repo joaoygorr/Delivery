@@ -22,12 +22,10 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String generateToken(User user)  {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-
             return JWT.create().withIssuer("auth-api")
                     .withSubject(user.getEmail())
                     .withExpiresAt(this.generateExpirationDate())
-                    .sign(algorithm);
+                    .sign(Algorithm.HMAC256(secret));
         } catch (JWTCreationException exception) {
             throw new TokenGenerationException("Erro na geração do token", exception);
         }
@@ -36,9 +34,7 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String validateToken(String token) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-
-            return JWT.require(algorithm)
+            return JWT.require(Algorithm.HMAC256(secret))
                     .withIssuer("auth-api")
                     .build()
                     .verify(token)
