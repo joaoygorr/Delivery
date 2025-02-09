@@ -19,7 +19,6 @@ public class TokenServiceImpl implements TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-
     @Override
     public String generateToken(User user)  {
         try {
