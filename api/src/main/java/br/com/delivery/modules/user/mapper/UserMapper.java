@@ -5,8 +5,9 @@ import br.com.delivery.records.user.UserLoginRecord;
 import br.com.delivery.records.user.UserRegisterRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.ERROR)
 public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
