@@ -10,10 +10,9 @@ const createAuthFormSchema = z.object({
     confirmPassword: z.string()
         .min(5, "A senha precisa de no mínimo 5 caracteres")
         .optional(),
-})
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "A senha e a confirmação de senha precisam ser iguais",
-        path: ["confirmPassword"]
-    });
+}).refine((data) => !data.confirmPassword || data.password === data.confirmPassword, {
+    message: "A senha e a confirmação de senha precisam ser iguais",
+    path: ["confirmPassword"]
+});
 
 export default createAuthFormSchema;
