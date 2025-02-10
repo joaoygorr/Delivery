@@ -12,18 +12,25 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import createAuthFormSchema from "@/shared/schemas/authForm";
 import { authFormData } from "@/shared/types/types";
+import { authApi } from "@/shared/api/api";
 
 export default function Page() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<authFormData>({
     resolver: zodResolver(createAuthFormSchema),
   });
 
   function submitLogin(data: authFormData) {
-    // TODO: envio do furmolário de login
+    console.log("hi", data);
+
+    try {
+      authApi.login(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -42,7 +49,6 @@ export default function Page() {
           label="Digite seu e-mail"
           fullWidth
           autoFocus
-          disabled={isLoading}
           {...register("email")}
         />
         {errors.email && <span>{errors.email.message}</span>}
@@ -51,18 +57,12 @@ export default function Page() {
           label="Digite sua senha"
           type="password"
           fullWidth
-          disabled={isLoading}
           {...register("password")}
         />
         {errors.password && <span>{errors.password.message}</span>}
 
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          disabled={isLoading}
-        >
-          {isLoading ? "Carregando..." : "Entrar"}
+        <Button type="submit" variant="contained" fullWidth>
+          entrar
         </Button>
 
         <Box className="box-auth-forgot">
