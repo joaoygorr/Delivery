@@ -40,7 +40,7 @@ public class TokenServiceImpl implements TokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            return "";
+            return null;
         }
     }
 
