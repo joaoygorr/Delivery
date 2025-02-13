@@ -10,7 +10,7 @@ export default function Page() {
         Este link expirou, refaça o procedimento
       </Alert>
 
-      <MuiLink href="/signIn/forgot" component={Link} variant="button">
+      <MuiLink href="/signin/forgot" component={Link} variant="button">
         Esqueci minha senha
       </MuiLink>
     </div>

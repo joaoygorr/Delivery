@@ -66,8 +66,13 @@ export default function Page() {
         </Button>
 
         <Box className="box-auth-forgot">
-          <MuiLink href="/signIn/forgot" variant="body2" component={Link}>
+          <MuiLink href="/signin/forgot" variant="body2" component={Link}>
             Esqueceu sua senha?
+          </MuiLink>
+        </Box>
+        <Box className="box-auth-forgot">
+          <MuiLink href="/signup" variant="body2" component={Link}>
+            realizar cadastro
           </MuiLink>
         </Box>
       </Box>
