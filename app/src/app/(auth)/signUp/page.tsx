@@ -5,6 +5,10 @@ import {
   TextField,
   Typography,
   Link as MuiLink,
+  Card,
+  FormControl,
+  FormLabel,
+  Divider,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import "./signUp.scss";
@@ -30,55 +34,87 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <Typography component="p" className="text-auth-register">
-        Digite seus dados para se registrar no painel administrativo e gerenciar
-        produtos/pedidos.
+    <Card variant="outlined" className="box-card-register">
+      <Typography component="h1" variant="h4" className="text-auth-register">
+        Cadastrar-se
       </Typography>
 
       <Box
         component="form"
         className="box-form-register"
+        noValidate
         onSubmit={handleSubmit(submitRegister)}
       >
-        <TextField
-          label="Digite nome"
-          fullWidth
-          autoFocus
-          {...register("userName")}
-        />
-        {errors.userName && <span>{errors.userName.message}</span>}
+        <FormControl>
+          <FormLabel htmlFor="userName">Nome Completo</FormLabel>
+          <TextField
+            placeholder="Jon Snow"
+            autoComplete="userName"
+            fullWidth
+            autoFocus
+            variant="outlined"
+            helperText={errors.userName?.message}
+            color={errors?.userName ? "error" : "primary"}
+            {...register("userName")}
+          />
+        </FormControl>
 
-        <TextField label="Digite seu e-mail" fullWidth {...register("email")} />
-        {errors.email && <span>{errors.email.message}</span>}
+        <FormControl>
+          <FormLabel htmlFor="email">E-mail</FormLabel>
+          <TextField
+            placeholder="your@email.com"
+            autoComplete="email"
+            fullWidth
+            {...register("email")}
+            color={errors?.email ? "error" : "primary"}
+            variant="outlined"
+            helperText={errors.email?.message}
+          />
+        </FormControl>
 
-        <TextField
-          label="Digite sua senha"
-          type="password"
-          fullWidth
-          {...register("password")}
-        />
-        {errors.password && <span>{errors.password.message}</span>}
+        <FormControl>
+          <FormLabel htmlFor="password">Senha</FormLabel>
+          <TextField
+            placeholder="••••••"
+            type="password"
+            variant="outlined"
+            fullWidth
+            {...register("password")}
+            color={errors?.password ? "error" : "primary"}
+            helperText={errors.password?.message}
+          />
+        </FormControl>
 
-        <TextField
-          label="Digite sua senha novamente"
-          type="password"
-          fullWidth
-          {...register("confirmPassword")}
-        />
-        {errors.confirmPassword && (
-          <span>{errors.confirmPassword.message}</span>
-        )}
+        <FormControl>
+          <FormLabel htmlFor="confirmPassord">Confirme sua senha</FormLabel>
+          <TextField
+            type="password"
+            placeholder="••••••"
+            fullWidth
+            {...register("confirmPassword")}
+            color={errors?.confirmPassword ? "error" : "primary"}
+            variant="outlined"
+            helperText={errors.confirmPassword?.message}
+          />
+        </FormControl>
+
         <Button type="submit" variant="contained" fullWidth>
           registrar
         </Button>
-
-        <Box className="box-auth-login">
-          <MuiLink href="/signin" variant="body2" component={Link}>
-            Realizar login
-          </MuiLink>
-        </Box>
       </Box>
-    </div>
+
+      <Divider className="divider">
+        <Typography>ou</Typography>
+      </Divider>
+
+      <Box className="box-auth-login">
+        <Typography>
+          Já tenho uma conta{" "}
+          <MuiLink href="/signin" variant="body2" component={Link}>
+            Login
+          </MuiLink>
+        </Typography>
+      </Box>
+    </Card>
   );
 }
