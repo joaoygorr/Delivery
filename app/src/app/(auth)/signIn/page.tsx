@@ -95,7 +95,11 @@ export default function Page() {
           Esqueceu sua senha?
         </MuiLink>
       </Box>
-      <Divider>ou</Divider>
+
+      <Divider className="divider">
+        <Typography>ou</Typography>
+      </Divider>
+
       <Box className="box-auth-forgot">
         <Typography>
           Não tem uma conta?{" "}
