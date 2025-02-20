@@ -1,5 +1,6 @@
 package br.com.delivery.modules.order;
 
+import br.com.delivery.modules.establishment.Establishment;
 import br.com.delivery.modules.order.enuns.OrderStatus;
 import br.com.delivery.modules.order.enuns.PaymentType;
 import br.com.delivery.modules.user.User;
@@ -9,8 +10,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Table(name = "orders")
-@Entity(name = "orders")
+@Table(name = "Orders")
+@Entity(name = "Orders")
 @Getter
 @Setter
 @NoArgsConstructor
