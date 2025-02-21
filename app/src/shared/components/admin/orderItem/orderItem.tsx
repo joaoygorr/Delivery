@@ -18,11 +18,13 @@ export default function OrderItem() {
             imprimir
           </Button>
         </Box>
+
         <Box>
           <Typography component="p" sx={{ fontSize: 24 }}>
             #id
           </Typography>
         </Box>
+
         <Box sx={{ backgroundColor: "#eee", p: 1 }}>
           <Select
             variant="standard"
@@ -34,6 +36,8 @@ export default function OrderItem() {
             <MenuItem value="delivered">Entregue</MenuItem>
           </Select>
         </Box>
+
+        <Box sx={{ p: 1, backgroundColor: "#fff" }}></Box>
       </Box>
     </Box>
   );
