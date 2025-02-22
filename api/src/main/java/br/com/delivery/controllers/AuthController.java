@@ -34,8 +34,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @Operation(summary = "Record a new user",
-            description = "Create a new user in the system based on the data provided in the request. Returns the details of the registered user."
-    )
+            description = "Create a new user in the system based on the data provided in the request. Returns the details of the registered user.")
     public ResponseEntity<ResponseRecord> register(@RequestBody @Valid UserRecord userRecord) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.register(userMapper
                 .toEntityAuth(userRecord)));
