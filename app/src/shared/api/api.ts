@@ -21,9 +21,8 @@ export class Api {
 
     getToken(): string | null {
         if (typeof window === "undefined") return null;
-        return localStorage.getItem("token");
+        return localStorage?.getItem("token") ?? null;
     }
-
     private verifyToken(token?: string): void {
         if (!token || typeof window === "undefined") return;
         localStorage.setItem("token", token);
