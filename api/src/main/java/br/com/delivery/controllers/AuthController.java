@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Auth", description = "Endpoint Related Authentication")
+@Tag(name = "Auth", description = "Endpoint related to authentication")
 @RequiredArgsConstructor
 public class AuthController {
 
