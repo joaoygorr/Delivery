@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-public record ProductRecord(Long id,
+public record ProductRecord(Long idProduct,
                             @NotBlank(message = "Nome não pode estar vazio") String name,
                             @NotNull(message = "Imagem não pode estar vazia") byte[] img,
                             @NotBlank(message = "Preço não pode estar vazia") BigDecimal price,
