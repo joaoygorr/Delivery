@@ -1,6 +1,6 @@
-package br.com.delivery.infra.security;
+package br.com.delivery.configuration.infra.security;
 
-import br.com.delivery.infra.filter.SecurityFilter;
+import br.com.delivery.configuration.infra.filter.SecurityFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

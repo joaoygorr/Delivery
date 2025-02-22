@@ -1,4 +1,4 @@
-package br.com.delivery.infra.filter;
+package br.com.delivery.configuration.infra.filter;
 
 import br.com.delivery.exceptions.Exception404;
 import br.com.delivery.modules.user.User;
