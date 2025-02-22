@@ -27,7 +27,7 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    private String img;
+    private byte[] img;
 
     @Column(nullable = false)
     private BigDecimal price;
