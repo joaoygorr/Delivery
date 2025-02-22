@@ -14,6 +14,7 @@ const createAuthFormSchema = z.object({
         .trim()
         .min(1, { message: "O nome não pode estar vazio" })
         .regex(/^[A-za-zÀ-ÖØ-öø-ÿ\s]+$/, { message: "O nome deve conter apenas letras e espaços" })
+        .optional()
 }).refine((data) => !data.confirmPassword || data.password === data.confirmPassword, {
     message: "A senha e a confirmação de senha precisam ser iguais",
     path: ["confirmPassword"]
