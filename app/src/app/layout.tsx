@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Flip, ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,6 +14,13 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>{children}</body>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        theme="colored"
+        transition={Flip}
+        pauseOnHover={false}
+      />
     </html>
   );
 }
