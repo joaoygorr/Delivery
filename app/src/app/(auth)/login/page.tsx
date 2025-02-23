@@ -14,11 +14,11 @@ import "./signIn.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import createAuthFormSchema from "@/shared/schemas/authForm";
-import { authFormData } from "@/shared/types/types";
 import { authApi } from "@/shared/api/api";
 import Link from "next/link";
 import ForgotPassword from "@/shared/components/forgotPassword";
 import { useState } from "react";
+import { authFormData } from "@/shared/schemas/types/types";
 
 export default function Page() {
   const {
@@ -103,7 +103,7 @@ export default function Page() {
       <Box className="box-auth-forgot">
         <Typography>
           Não tem uma conta?{" "}
-          <MuiLink href="/signup" variant="body2" component={Link}>
+          <MuiLink href="/register" variant="body2" component={Link}>
             Cadastrar-se
           </MuiLink>
         </Typography>

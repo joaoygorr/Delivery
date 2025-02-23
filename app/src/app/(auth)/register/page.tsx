@@ -14,11 +14,14 @@ import { useForm } from "react-hook-form";
 import "./signUp.scss";
 import createAuthFormSchema from "@/shared/schemas/authForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authFormData } from "@/shared/types/types";
 import { authApi } from "@/shared/api/api";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { authFormData } from "@/shared/schemas/types/types";
 
 export default function Page() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -30,6 +33,7 @@ export default function Page() {
   function submitRegister(data: authFormData) {
     try {
       authApi.register(data);
+      router.push("/products");
     } catch {}
   }
 
@@ -110,7 +114,7 @@ export default function Page() {
       <Box className="box-auth-login">
         <Typography>
           Já tenho uma conta{" "}
-          <MuiLink href="/signin" variant="body2" component={Link}>
+          <MuiLink href="/login" variant="body2" component={Link}>
             Login
           </MuiLink>
         </Typography>
