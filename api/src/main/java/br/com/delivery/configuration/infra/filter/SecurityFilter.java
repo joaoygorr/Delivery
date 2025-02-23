@@ -1,6 +1,6 @@
 package br.com.delivery.configuration.infra.filter;
 
-import br.com.delivery.exceptions.Exception404;
+import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.user.User;
 import br.com.delivery.repositories.UserRepository;
 import br.com.delivery.services.auth.TokenService;

@@ -1,6 +1,6 @@
 package br.com.delivery.services.auth;
 
-import br.com.delivery.exceptions.TokenGenerationException;
+import br.com.delivery.configuration.exceptions.TokenGenerationException;
 import br.com.delivery.modules.user.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

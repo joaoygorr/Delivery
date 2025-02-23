@@ -1,7 +1,7 @@
 package br.com.delivery.services.user;
 
-import br.com.delivery.exceptions.Exception401;
-import br.com.delivery.exceptions.Exception404;
+import br.com.delivery.configuration.exceptions.Exception401;
+import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.user.User;
 import br.com.delivery.records.user.ResponseRecord;
 import br.com.delivery.repositories.UserRepository;

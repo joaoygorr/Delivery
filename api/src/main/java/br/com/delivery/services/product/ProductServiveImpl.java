@@ -1,6 +1,6 @@
 package br.com.delivery.services.product;
 
-import br.com.delivery.exceptions.Exception404;
+import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.product.Product;
 import br.com.delivery.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
