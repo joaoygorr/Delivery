@@ -44,6 +44,6 @@ public class UserServiceImpl implements UserService {
             return new ResponseRecord(newUser.getUsername(), this.tokenService.generateToken(newUser));
         }
 
-        throw new Exception401("Credenciais inválidas");
+        throw new Exception401("E-mail já cadastrado");
     }
 }
