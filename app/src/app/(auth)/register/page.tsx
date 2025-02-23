@@ -18,6 +18,8 @@ import { authApi } from "@/shared/api/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authFormData } from "@/shared/schemas/types/types";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 export default function Page() {
   const router = useRouter();
@@ -30,11 +32,15 @@ export default function Page() {
     resolver: zodResolver(createAuthFormSchema),
   });
 
-  function submitRegister(data: authFormData) {
+  async function submitRegister(data: authFormData) {
     try {
-      authApi.register(data);
+      await authApi.register(data);
       router.push("/products");
-    } catch {}
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.error || "Erro na requisição.");
+      }
+    }
   }
 
   return (
@@ -83,6 +89,7 @@ export default function Page() {
             type="password"
             variant="outlined"
             fullWidth
+            autoComplete="password"
             {...register("password")}
             color={errors?.password ? "error" : "primary"}
             helperText={errors.password?.message}
@@ -94,6 +101,7 @@ export default function Page() {
           <TextField
             type="password"
             placeholder="••••••"
+            autoComplete="confirmPassword"
             fullWidth
             {...register("confirmPassword")}
             color={errors?.confirmPassword ? "error" : "primary"}
