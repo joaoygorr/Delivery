@@ -9,6 +9,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.ERROR)
 public abstract class ProductMapper  {
@@ -29,5 +32,13 @@ public abstract class ProductMapper  {
 
     Long mapCategorytoLong(Category category) {
         return category.getIdCategory();
+    }
+
+    byte[] mapMultipartFileToByte(MultipartFile multipartFile) throws IOException {
+        return multipartFile.getBytes();
+    }
+
+    MultipartFile matByteToMultiparFile(byte[] bytes) {
+        return new CustomMultipartFile(bytes);
     }
 }
