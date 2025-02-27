@@ -35,6 +35,7 @@ export default function Page() {
   async function submitRegister(data: authFormData) {
     try {
       await authApi.register(data);
+      toast.done("Cadastro feito com sucesso!");
       router.push("/products");
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
