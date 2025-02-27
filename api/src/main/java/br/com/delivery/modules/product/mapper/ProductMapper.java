@@ -27,7 +27,7 @@ public abstract class ProductMapper  {
 
     Category mapLongToCategory(Long id) {
         return this.categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
     }
 
     Long mapCategorytoLong(Category category) {
