@@ -3,10 +3,9 @@ package br.com.delivery.modules.establishment;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @Table(name = "Establishments")
 @Entity(name = "Establishments")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "idEstablishment")
