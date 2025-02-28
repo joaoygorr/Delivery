@@ -20,8 +20,10 @@ import { useRouter } from "next/navigation";
 import { authFormData } from "@/shared/schemas/types/types";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useState } from "react";
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -33,14 +35,17 @@ export default function Page() {
   });
 
   async function submitRegister(data: authFormData) {
+    setLoading(true);
     try {
       await authApi.register(data);
-      toast.done("Cadastro feito com sucesso!");
+      toast.success("Cadastro feito com sucesso!");
       router.push("/products");
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data?.error || "Erro na requisição.");
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -64,6 +69,7 @@ export default function Page() {
             fullWidth
             autoFocus
             variant="outlined"
+            disabled={loading}
             helperText={errors.userName?.message}
             color={errors?.userName ? "error" : "primary"}
             {...register("userName")}
@@ -76,10 +82,11 @@ export default function Page() {
             placeholder="your@email.com"
             autoComplete="email"
             fullWidth
-            {...register("email")}
-            color={errors?.email ? "error" : "primary"}
             variant="outlined"
+            disabled={loading}
             helperText={errors.email?.message}
+            color={errors?.email ? "error" : "primary"}
+            {...register("email")}
           />
         </FormControl>
 
@@ -91,9 +98,10 @@ export default function Page() {
             variant="outlined"
             fullWidth
             autoComplete="password"
-            {...register("password")}
-            color={errors?.password ? "error" : "primary"}
+            disabled={loading}
             helperText={errors.password?.message}
+            color={errors?.password ? "error" : "primary"}
+            {...register("password")}
           />
         </FormControl>
 
@@ -104,14 +112,15 @@ export default function Page() {
             placeholder="••••••"
             autoComplete="confirmPassword"
             fullWidth
-            {...register("confirmPassword")}
-            color={errors?.confirmPassword ? "error" : "primary"}
             variant="outlined"
+            disabled={loading}
             helperText={errors.confirmPassword?.message}
+            color={errors?.confirmPassword ? "error" : "primary"}
+            {...register("confirmPassword")}
           />
         </FormControl>
 
-        <Button type="submit" variant="contained" fullWidth>
+        <Button type="submit" variant="contained" fullWidth disabled={loading}>
           registrar
         </Button>
       </Box>
