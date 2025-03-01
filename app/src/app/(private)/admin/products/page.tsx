@@ -52,6 +52,7 @@ export default function Page() {
 
       await productApi.createProduct(formData);
       toast.success("Produto cadastrado com sucesso!");
+      setOpenDialog(false);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data?.error || "Erro na requisição.");
