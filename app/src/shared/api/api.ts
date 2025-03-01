@@ -23,11 +23,17 @@ export class Api {
 
     getToken(): string | null {
         if (typeof window === "undefined") return null;
-        return localStorage?.getItem("token") ?? null;
+        const cookies = document.cookie.split('; ');
+        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+        if (tokenCookie) {
+            return tokenCookie.split('=')[1];
+        }
+        return null;
     }
     private verifyToken(token?: string): void {
         if (!token || typeof window === "undefined") return;
-        localStorage.setItem("token", token);
+        document.cookie = `token=${token}; path=/; secure; samesite=strict;`;
     }
 
     async login(user: authFormData): Promise<{ userName: string, token: string }> {
