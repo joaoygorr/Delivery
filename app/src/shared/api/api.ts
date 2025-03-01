@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { authFormData } from "../types/types";
+import { authFormData, productFormData } from "../schemas/types/types";
 
 export class Api {
     private api: AxiosInstance;
@@ -7,7 +7,9 @@ export class Api {
     constructor(url: string) {
         this.api = axios.create({
             baseURL: process.env.NEXT_PUBLIC_URL + url,
-            headers: { Accept: "application/json" }
+            headers: {
+                "Content-Type": "application/json",
+            },
         });
 
         this.api.interceptors.request.use((config) => {
@@ -39,6 +41,16 @@ export class Api {
         this.verifyToken(res?.data?.token);
         return res.data;
     }
+
+    async createProduct(product: FormData): Promise<productFormData> {
+        return await this.api.post("/create", product, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    }
 }
 
 export const authApi = new Api("/auth");
+
+export const productApi = new Api("/product");
