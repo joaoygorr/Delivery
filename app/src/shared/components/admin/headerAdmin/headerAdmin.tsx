@@ -48,11 +48,11 @@ export default function HeaderAdmin() {
               <Button>pedidos</Button>
             </Link>
 
-            <Link href="/products">
+            <Link href="/admin/products">
               <Button>produtos</Button>
             </Link>
 
-            <Link href="/categories">
+            <Link href="/admin/categories">
               <Button>categorias</Button>
             </Link>
             <Button onClick={handleLogout}>sair</Button>
