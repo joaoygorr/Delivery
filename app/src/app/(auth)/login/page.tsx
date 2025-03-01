@@ -19,6 +19,9 @@ import Link from "next/link";
 import ForgotPassword from "@/shared/components/forgotPassword";
 import { useState } from "react";
 import { authFormData } from "@/shared/schemas/types/types";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 export default function Page() {
   const {
@@ -30,14 +33,21 @@ export default function Page() {
   });
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  function submitLogin(data: authFormData) {
-    console.log("hi", data);
-
+  async function submitLogin(data: authFormData) {
+    setLoading(true);
     try {
-      authApi.login(data);
-    } catch (e) {
-      console.log(e);
+      await authApi.login(data);
+      toast.success("Login realizado com sucesso!");
+      router.push("/admin/products");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.error || "Erro na requisição.");
+      }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -58,10 +68,11 @@ export default function Page() {
             placeholder="your@email.com"
             autoComplete="email"
             fullWidth
-            helperText={errors.email?.message}
             autoFocus
-            color={errors?.email ? "error" : "primary"}
             variant="outlined"
+            disabled={loading}
+            helperText={errors.email?.message}
+            color={errors?.email ? "error" : "primary"}
             {...register("email")}
           />
         </FormControl>
@@ -71,9 +82,10 @@ export default function Page() {
           <TextField
             type="password"
             placeholder="••••••"
-            helperText={errors.password?.message}
             fullWidth
             variant="outlined"
+            disabled={loading}
+            helperText={errors.password?.message}
             color={errors?.password ? "error" : "primary"}
             {...register("password")}
           />
@@ -81,7 +93,7 @@ export default function Page() {
 
         <ForgotPassword open={open} handleClose={setOpen} />
 
-        <Button type="submit" variant="contained" fullWidth>
+        <Button type="submit" variant="contained" fullWidth disabled={loading}>
           entrar
         </Button>
 
