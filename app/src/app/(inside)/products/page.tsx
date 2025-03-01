@@ -12,9 +12,54 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import "./product.scss";
+import { productFormData } from "@/shared/schemas/types/types";
+import { productApi } from "@/shared/api/api";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSaveEditDialog(data: productFormData) {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+
+      const valueMapper = (value: unknown): string | Blob => {
+        switch (true) {
+          case String(value).includes("R$"):
+            return String(value)
+              .replace(/\D/g, "")
+              .replace(/(\d{2})$/, ".$1");
+
+          case typeof value === "string":
+            return value;
+
+          case typeof value === "object":
+            return value instanceof File ? value : JSON.stringify(value);
+
+          default:
+            return "";
+        }
+      };
+
+      Object.entries(data).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          formData.append(key, valueMapper(value));
+        }
+      });
+
+      await productApi.createProduct(formData);
+      toast.success("Produto cadastrado com sucesso!");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.error || "Erro na requisição.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Box className="box-product">
@@ -50,7 +95,9 @@ export default function Page() {
 
       <ProductEditDialog
         open={openDialog}
+        onSave={handleSaveEditDialog}
         onClose={() => setOpenDialog(false)}
+        disable={loading}
       />
     </Box>
   );
