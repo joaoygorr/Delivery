@@ -3,6 +3,7 @@ package br.com.delivery.modules.product.mapper;
 import br.com.delivery.modules.category.Category;
 import br.com.delivery.modules.product.Product;
 import br.com.delivery.records.product.ProductRecord;
+import br.com.delivery.records.product.ProductResponseRecord;
 import br.com.delivery.repositories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.mapstruct.Mapper;
@@ -23,7 +24,7 @@ public abstract class ProductMapper  {
     public abstract Product toEntity(ProductRecord productRecord);
 
     @Mapping(target = "categoryId", source = "category")
-    public abstract ProductRecord toDto(Product product);
+    public abstract ProductResponseRecord toDto(Product product);
 
     Category mapLongToCategory(Long id) {
         return this.categoryRepository.findById(id)
@@ -36,9 +37,5 @@ public abstract class ProductMapper  {
 
     byte[] mapMultipartFileToByte(MultipartFile multipartFile) throws IOException {
         return multipartFile.getBytes();
-    }
-
-    MultipartFile matByteToMultiparFile(byte[] bytes) {
-        return new CustomMultipartFile(bytes);
     }
 }

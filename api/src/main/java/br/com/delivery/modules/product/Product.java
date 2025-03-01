@@ -6,10 +6,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+@Data
 @Table(name = "Products")
 @Entity(name = "Products")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "idProduct")

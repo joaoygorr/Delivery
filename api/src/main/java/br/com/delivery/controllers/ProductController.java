@@ -2,12 +2,15 @@ package br.com.delivery.controllers;
 
 import br.com.delivery.modules.product.mapper.ProductMapper;
 import br.com.delivery.records.product.ProductRecord;
+import br.com.delivery.records.product.ProductResponseRecord;
 import br.com.delivery.services.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +27,8 @@ public class ProductController {
     @PostMapping("/create")
     @Operation(summary = "Record a new product",
             description = "Create a new product in the system based on the data provided in the request. Returns the details of the registered product.")
-    public ProductRecord post(@ModelAttribute @Valid ProductRecord productRecord) {
-        return productMapper.toDto(this.productService.createProduct(productMapper.toEntity(productRecord)));
+    public ResponseEntity<ProductResponseRecord> post(@ModelAttribute @Valid ProductRecord productRecord) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(productMapper.toDto(this.productService.createProduct(productMapper.toEntity(productRecord))));
     }
 }
