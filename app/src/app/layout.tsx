@@ -16,10 +16,11 @@ export default function RootLayout({
       <body>{children}</body>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         theme="colored"
         transition={Flip}
         pauseOnHover={false}
+        pauseOnFocusLoss={false}
       />
     </html>
   );
