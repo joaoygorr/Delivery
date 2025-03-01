@@ -1,6 +1,7 @@
 package br.com.delivery.controllers;
 
 import br.com.delivery.modules.user.mapper.UserMapper;
+import br.com.delivery.records.user.LoginRecord;
 import br.com.delivery.records.user.ResponseRecord;
 import br.com.delivery.records.user.UserRecord;
 import br.com.delivery.services.user.UserService;
@@ -28,8 +29,8 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Authenticate user",
             description = "Perform a user authentication based on the credentials provided and returns an authentication token.")
-    public ResponseEntity<ResponseRecord> login(@RequestBody @Valid UserRecord userRecord) {
-        return ResponseEntity.ok(this.userService.login(userMapper.toEntityAuth(userRecord)));
+    public ResponseEntity<ResponseRecord> login(@RequestBody @Valid LoginRecord loginRecord) {
+        return ResponseEntity.ok(this.userService.login(userMapper.toEntityLogin(loginRecord)));
     }
 
     @PostMapping("/register")
@@ -37,6 +38,6 @@ public class AuthController {
             description = "Create a new user in the system based on the data provided in the request. Returns the details of the registered user.")
     public ResponseEntity<ResponseRecord> register(@RequestBody @Valid UserRecord userRecord) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.register(userMapper
-                .toEntityAuth(userRecord)));
+                .toEntityRegister(userRecord)));
     }
 }
