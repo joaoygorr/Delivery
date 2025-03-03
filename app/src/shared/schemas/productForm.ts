@@ -4,7 +4,7 @@ const createProductFormSchema = z.object({
     idProduct: z.number().optional(),
     name: z.string()
         .trim()
-        .nonempty("O nome é obrigatório"),
+        .nonempty("O nome do produto é obrigatório"),
     img: z.union([
         z.instanceof(FileList)
             .transform(list => list.item(0)),
