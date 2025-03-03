@@ -1,0 +1,14 @@
+.box-category {
+    margin: 1.5rem 0;
+
+    .box-header-category {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+
+        h5 {
+            color: #555;
+            margin-right: 1rem;
+        }
+    }
+}
