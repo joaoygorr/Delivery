@@ -1,5 +1,5 @@
 "use client";
-import ProductEditDialog from "@/shared/components/admin/productEditDialog/productEditDialog";
+import ProductEditDialog from "@/shared/components/admin/productDialog/productDialog";
 import {
   Box,
   Button,
