@@ -10,4 +10,8 @@ public interface CategoryService {
     Category createCategory(CategoryRecord categoryRecord);
 
     Page<Category> getCategories(Pageable pageable);
+
+    Category getById(Long id);
+
+    void deleteCategory(Long id);
 }

@@ -42,4 +42,12 @@ public class CategoryController {
         Page<Category> categoriesPage = this.categoryService.getCategories(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(categoriesPage.map(this.categoryMapper::toDto));
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a category",
+            description = "Delete a category from the system by its ID")
+    public ResponseEntity<Void> getAll(@PathVariable Long id) {
+        this.categoryService.deleteCategory(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
