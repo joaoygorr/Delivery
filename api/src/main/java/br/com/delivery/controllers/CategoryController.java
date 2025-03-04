@@ -36,7 +36,8 @@ public class CategoryController {
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Returns categories", description = "Returns details of all categories")
+    @Operation(summary = "Retrieve all categories",
+            description = "Fetch a paginated list of all categories available in the system.")
     public ResponseEntity<Page<CategoryRecord>> getAll(Pageable pageable) {
         Page<Category> categoriesPage = this.categoryService.getCategories(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(categoriesPage.map(this.categoryMapper::toDto));
