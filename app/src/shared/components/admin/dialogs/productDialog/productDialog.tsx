@@ -21,7 +21,10 @@ import {
 import { useForm } from "react-hook-form";
 import "./productDialog.scss";
 import { useEffect, useState } from "react";
-import { productFormData } from "@/shared/schemas/types/types";
+import {
+  categoryFormData,
+  productFormData,
+} from "@/shared/schemas/types/types";
 import handlePriceChange from "@/shared/utils/priceMask";
 
 type Props = {
@@ -29,6 +32,7 @@ type Props = {
   onClose: () => void;
   onSave: (event: productFormData) => void;
   disable: boolean;
+  categories: categoryFormData[];
 };
 
 export default function ProductDialog({
@@ -36,6 +40,7 @@ export default function ProductDialog({
   onClose,
   onSave,
   disable,
+  categories,
 }: Props) {
   const [uploadMethod, setUploadMethod] = useState<string>("file");
 
@@ -177,7 +182,11 @@ export default function ProductDialog({
               error={!!errors.categoryId}
               {...register("categoryId")}
             >
-              <MenuItem value="1">teste</MenuItem>
+              {categories?.map((category) => (
+                <MenuItem key={category.idCategory} value={category.idCategory}>
+                  {category.name}
+                </MenuItem>
+              ))}
             </Select>
             {errors.categoryId && (
               <FormHelperText>{errors.categoryId.message}</FormHelperText>
