@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { authFormData, categoryFormData, productFormData } from "../schemas/types/types";
+import { IResponse } from "../schemas/types/IResponse";
 
 export class Api {
     private api: AxiosInstance;
@@ -60,7 +61,7 @@ export class Api {
         return await this.api.post("/create", category);
     }
 
-    async getCategories(): Promise<categoryFormData[]> {
+    async getCategories(): Promise<IResponse<categoryFormData[]>> {
         return await this.api.get("/all");
     }
 }
