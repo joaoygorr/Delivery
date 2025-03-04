@@ -29,6 +29,7 @@ export default function Page() {
       await categoryApi.createCategory(data);
       toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
+      getData();
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data?.error || "Erro na requisição.");
@@ -38,23 +39,36 @@ export default function Page() {
     }
   }
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const { data } = await categoryApi.getCategories();
-        setCategories(data?.content);
-      } catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          //TODO: fazer
-        }
+  async function getData() {
+    try {
+      const { data } = await categoryApi.getCategories();
+      setCategories(data?.content);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.message);
       }
     }
+  }
+
+  useEffect(() => {
     getData();
   }, []);
 
   const handleEditCategory = (data: categoryFormData) => {};
 
-  const handleDeleteCategory = (data: categoryFormData) => {};
+  const handleDeleteCategory = async (data: categoryFormData) => {
+    if (data?.idCategory == null) return;
+
+    try {
+      await categoryApi.deleteCategory(data.idCategory);
+      toast.success("Categoria excluída com sucesso");
+      getData();
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.message);
+      }
+    }
+  };
 
   return (
     <Box className="box-category">
