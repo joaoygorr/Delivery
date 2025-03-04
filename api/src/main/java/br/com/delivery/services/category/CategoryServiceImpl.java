@@ -3,7 +3,6 @@ package br.com.delivery.services.category;
 import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.category.Category;
 import br.com.delivery.modules.category.mapper.CategoryMapper;
-import br.com.delivery.records.category.CategoryRecord;
 import br.com.delivery.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public Category createCategory(CategoryRecord categoryRecord) {
-        return this.categoryRepository.save(this.categoryMapper.toEntity(categoryRecord));
+    public Category createCategory(Category category) {
+        return this.categoryRepository.save(category);
     }
 
     @Override
@@ -39,4 +38,6 @@ public class CategoryServiceImpl implements CategoryService {
         getById(id);
         this.categoryRepository.deleteById(id);
     }
+
+
 }

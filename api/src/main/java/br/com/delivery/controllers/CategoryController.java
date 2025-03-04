@@ -32,7 +32,9 @@ public class CategoryController {
             description = "Create a new category in the system based on the data provided in the request. Returns the details of the registered category.")
     public ResponseEntity<CategoryRecord> post(@RequestBody @Valid CategoryRecord categoryRecord) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.categoryMapper.toDto(this.categoryService.createCategory(categoryRecord)));
+                .body(this.categoryMapper.toDto(
+                        this.categoryService.createCategory(
+                                this.categoryMapper.toEntity(categoryRecord))));
     }
 
     @GetMapping("/all")
@@ -44,10 +46,14 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a category",
-            description = "Delete a category from the system by its ID")
+    @Operation(summary = "Delete a category", description = "Delete a category from the system by its ID")
     public ResponseEntity<Void> getAll(@PathVariable Long id) {
         this.categoryService.deleteCategory(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping
+    public ResponseEntity<CategoryRecord> editCategory(@RequestBody CategoryRecord categoryRecord) {
+
     }
 }
