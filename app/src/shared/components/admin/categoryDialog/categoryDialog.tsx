@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import "./categoryDialog.scss";
 
 type Props = {
   open: boolean;
@@ -47,7 +48,6 @@ export default function CategoryDialog({
       <DialogContent>
         <Box
           component="form"
-          encType="multipart/form-data"
           onSubmit={handleSubmit(onSave)}
           className="box-form-category"
         >
