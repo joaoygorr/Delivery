@@ -64,6 +64,10 @@ export class Api {
     async getCategories(): Promise<IResponse<categoryFormData[]>> {
         return await this.api.get("/all");
     }
+
+    async deleteCategory(id: number): Promise<void> {
+        return await this.api.delete(`/${id}`);
+    }
 }
 
 export const authApi = new Api("/auth");
