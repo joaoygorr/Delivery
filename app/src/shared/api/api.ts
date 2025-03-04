@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { authFormData, productFormData } from "../schemas/types/types";
+import { authFormData, categoryFormData, productFormData } from "../schemas/types/types";
 
 export class Api {
     private api: AxiosInstance;
@@ -55,8 +55,18 @@ export class Api {
             },
         });
     }
+
+    async createCategory(category: categoryFormData): Promise<categoryFormData> {
+        return await this.api.post("/create", category);
+    }
+
+    async getCategories(): Promise<categoryFormData[]> {
+        return await this.api.get("/all");
+    }
 }
 
 export const authApi = new Api("/auth");
 
 export const productApi = new Api("/product");
+
+export const categoryApi = new Api("/category");
