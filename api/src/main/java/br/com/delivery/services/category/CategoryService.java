@@ -13,4 +13,6 @@ public interface CategoryService {
     Category getById(Long id);
 
     void deleteCategory(Long id);
+
+    Category updateCategory(Long id, Category category);
 }

@@ -21,6 +21,7 @@ type Props = {
   onClose: () => void;
   onSave: (event: categoryFormData) => void;
   disable: boolean;
+  category?: categoryFormData;
 };
 
 export default function CategoryDialog({
@@ -28,6 +29,7 @@ export default function CategoryDialog({
   onClose,
   onSave,
   open,
+  category,
 }: Props) {
   const {
     register,
@@ -39,12 +41,14 @@ export default function CategoryDialog({
   });
 
   useEffect(() => {
-    if (!open) reset();
-  }, [open, reset]);
+    if (open) reset(category || { name: "" });
+  }, [open, reset, category]);
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle>Nova Categoria</DialogTitle>
+      <DialogTitle>
+        {category ? "Editar Categoria" : "Nova Categoria"}
+      </DialogTitle>
       <DialogContent>
         <Box
           component="form"
@@ -59,6 +63,7 @@ export default function CategoryDialog({
               placeholder="Digite o nome da categoria"
               fullWidth
               disabled={disable}
+              defaultValue={category?.name}
               color={errors?.name ? "error" : "primary"}
               helperText={errors.name?.message}
               {...register("name")}

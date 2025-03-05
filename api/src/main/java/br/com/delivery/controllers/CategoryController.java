@@ -52,8 +52,11 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping
-    public ResponseEntity<CategoryRecord> editCategory(@RequestBody CategoryRecord categoryRecord) {
-
+    @PutMapping("/{id}")
+    @Operation(summary = "Update a category", description = "Update a category from the system by its id")
+    public ResponseEntity<CategoryRecord> editCategory(@PathVariable Long id, @RequestBody CategoryRecord categoryRecord) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(this.categoryMapper.toDto(
+                        this.categoryService.updateCategory(id, this.categoryMapper.toEntity(categoryRecord))));
     }
 }
