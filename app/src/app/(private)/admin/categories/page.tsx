@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import "./category.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CategoryDialog from "@/shared/components/admin/dialogs/categoryDialog/categoryDialog";
 import { categoryFormData } from "@/shared/schemas/types/types";
 import { toast } from "react-toastify";
@@ -22,14 +22,39 @@ export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<categoryFormData[]>([]);
+  const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
 
-  async function handleSaveEditDialog(data: categoryFormData) {
+  function handleSaveEditDialog(data: categoryFormData) {
+    if (categoryToEdit) {
+      handleEdit(data);
+    } else {
+      handleSave(data);
+    }
+  }
+
+  const getData = useCallback(async () => {
+    try {
+      const { data } = await categoryApi.getCategories();
+      setCategories(data?.content);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.message);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  const handleSave = async (data: categoryFormData) => {
     setLoading(true);
     try {
-      await categoryApi.createCategory(data);
+      const newCategory = await categoryApi.createCategory(data);
+      setCategories((prev) => [...prev, newCategory.data as categoryFormData]);
+
       toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
-      getData();
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data?.error || "Erro na requisição.");
@@ -37,32 +62,50 @@ export default function Page() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  async function getData() {
+  const handleEdit = async (data: categoryFormData) => {
+    setLoading(true);
     try {
-      const { data } = await categoryApi.getCategories();
-      setCategories(data?.content);
-    } catch (error: unknown) {
+      const updatedCategory = await categoryApi.updateCategory(data);
+
+      setCategories((prev) =>
+        prev.map((cat) =>
+          cat.idCategory === updatedCategory.data.idCategory
+            ? updatedCategory.data
+            : cat
+        )
+      );
+      toast.success("Categoria criada com sucesso!");
+      setOpenDialog(false);
+    } catch (error) {
       if (error instanceof AxiosError) {
-        toast.error(error.message);
+        toast.error(error.response?.data?.error || "Erro na requisição.");
       }
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const handleNewCategory = () => {
+    setCategoryToEdit(undefined);
+    setOpenDialog(true);
+  };
 
-  const handleEditCategory = (data: categoryFormData) => {};
+  const handleEditCategory = (category: categoryFormData) => {
+    setCategoryToEdit(category);
+    setOpenDialog(true);
+  };
 
   const handleDeleteCategory = async (data: categoryFormData) => {
-    if (data?.idCategory == null) return;
+    if (!data?.idCategory) return;
 
     try {
-      await categoryApi.deleteCategory(data.idCategory);
+      await categoryApi.deleteObject(data.idCategory);
+      setCategories((prev) =>
+        prev.filter((cat) => cat.idCategory !== data.idCategory)
+      );
       toast.success("Categoria excluída com sucesso");
-      getData();
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         toast.error(error.message);
@@ -76,9 +119,7 @@ export default function Page() {
         <Typography component="h5" variant="h5">
           Categorias
         </Typography>
-        <Button onClick={() => setOpenDialog(!openDialog)}>
-          Nova Categoria
-        </Button>
+        <Button onClick={handleNewCategory}>Nova Categoria</Button>
       </Box>
 
       <Table>
@@ -107,8 +148,12 @@ export default function Page() {
       <CategoryDialog
         onSave={handleSaveEditDialog}
         open={openDialog}
-        onClose={() => setOpenDialog(false)}
+        onClose={() => {
+          setOpenDialog(false);
+          setCategoryToEdit(undefined);
+        }}
         disable={loading}
+        category={categoryToEdit}
       />
     </Box>
   );
