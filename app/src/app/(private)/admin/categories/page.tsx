@@ -148,10 +148,7 @@ export default function Page() {
       <CategoryDialog
         onSave={handleSaveEditDialog}
         open={openDialog}
-        onClose={() => {
-          setOpenDialog(false);
-          setCategoryToEdit(undefined);
-        }}
+        onClose={() => setOpenDialog(false)}
         disable={loading}
         category={categoryToEdit}
       />
