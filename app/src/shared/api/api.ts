@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { authFormData, categoryFormData, productFormData } from "../schemas/types/types";
 import { IResponse } from "../schemas/types/IResponse";
+import { IPagedResponse } from "../schemas/types/IPagedResponse";
 
 export class Api {
     private api: AxiosInstance;
@@ -32,6 +33,7 @@ export class Api {
         }
         return null;
     }
+
     private verifyToken(token?: string): void {
         if (!token || typeof window === "undefined") return;
         document.cookie = `token=${token}; path=/; secure; samesite=strict;`;
@@ -57,16 +59,21 @@ export class Api {
         });
     }
 
-    async createCategory(category: categoryFormData): Promise<categoryFormData> {
+    async createCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
         return await this.api.post("/create", category);
     }
 
-    async getCategories(): Promise<IResponse<categoryFormData[]>> {
-        return await this.api.get("/all");
+    async getCategories(): Promise<IPagedResponse<categoryFormData[]>> {
+        const response = await this.api.get("/all");
+        return response.data;
     }
 
-    async deleteCategory(id: number): Promise<void> {
+    async deleteObject(id: number): Promise<void> {
         return await this.api.delete(`/${id}`);
+    }
+
+    async updateCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
+        return await this.api.put(`/${Number(category.idCategory)}`, category);
     }
 }
 
