@@ -13,15 +13,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        theme="colored"
-        transition={Flip}
-        pauseOnHover={false}
-        pauseOnFocusLoss={false}
-      />
+      <body style={{ margin: 0 }}>
+        {children}
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          theme="colored"
+          transition={Flip}
+          pauseOnHover={false}
+          pauseOnFocusLoss={false}
+        />
+      </body>
     </html>
   );
 }
