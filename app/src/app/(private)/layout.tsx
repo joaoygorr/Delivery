@@ -1,3 +1,4 @@
+"use client";
 import HeaderAdmin from "@/shared/components/admin/headerAdmin/headerAdmin";
 import { Container } from "@mui/material";
 import { ReactNode } from "react";
@@ -10,13 +11,11 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   return (
-    <body style={{ margin: 0 }}>
-      <QueryClientProvider client={queryClient}>
-        <HeaderAdmin />
-        <Container component="section" maxWidth="lg">
-          {children}
-        </Container>
-      </QueryClientProvider>
-    </body>
+    <QueryClientProvider client={queryClient}>
+      <HeaderAdmin />
+      <Container component="section" maxWidth="lg">
+        {children}
+      </Container>
+    </QueryClientProvider>
   );
 }
