@@ -10,18 +10,19 @@ import {
   Typography,
 } from "@mui/material";
 import "./category.scss";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import CategoryDialog from "@/shared/components/admin/dialogs/categoryDialog/categoryDialog";
 import { categoryFormData } from "@/shared/schemas/types/types";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { categoryApi } from "@/shared/api/api";
 import CategoryTableItem from "@/shared/components/admin/items/categoryTableItems/categoryTableItems";
+import { useQuery } from "@tanstack/react-query";
+import { IPagedResponse } from "@/shared/schemas/types/IPagedResponse";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState<categoryFormData[]>([]);
   const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
 
   function handleSaveEditDialog(data: categoryFormData) {
@@ -32,27 +33,15 @@ export default function Page() {
     }
   }
 
-  const getData = useCallback(async () => {
-    try {
-      const { data } = await categoryApi.getCategories();
-      setCategories(data?.content);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.message);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  const { data: categories } = useQuery<IPagedResponse<categoryFormData[]>>({
+    queryKey: ["categories"],
+    queryFn: () => categoryApi.getCategories(),
+  });
 
   const handleSave = async (data: categoryFormData) => {
     setLoading(true);
     try {
-      const newCategory = await categoryApi.createCategory(data);
-      setCategories((prev) => [...prev, newCategory.data as categoryFormData]);
-
+      await categoryApi.createCategory(data);
       toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
     } catch (error) {
@@ -67,15 +56,7 @@ export default function Page() {
   const handleEdit = async (data: categoryFormData) => {
     setLoading(true);
     try {
-      const updatedCategory = await categoryApi.updateCategory(data);
-
-      setCategories((prev) =>
-        prev.map((cat) =>
-          cat.idCategory === updatedCategory.data.idCategory
-            ? updatedCategory.data
-            : cat
-        )
-      );
+      await categoryApi.updateCategory(data);
       toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
     } catch (error) {
@@ -102,9 +83,6 @@ export default function Page() {
 
     try {
       await categoryApi.deleteObject(data.idCategory);
-      setCategories((prev) =>
-        prev.filter((cat) => cat.idCategory !== data.idCategory)
-      );
       toast.success("Categoria excluída com sucesso");
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
@@ -133,15 +111,14 @@ export default function Page() {
         </TableHead>
 
         <TableBody>
-          {!loading &&
-            categories.map((item) => (
-              <CategoryTableItem
-                key={item.idCategory}
-                item={item}
-                onDelete={handleDeleteCategory}
-                onEdit={handleEditCategory}
-              />
-            ))}
+          {categories?.content?.map((item) => (
+            <CategoryTableItem
+              key={item.idCategory}
+              item={item}
+              onDelete={handleDeleteCategory}
+              onEdit={handleEditCategory}
+            />
+          ))}
         </TableBody>
       </Table>
 
