@@ -1,6 +1,7 @@
 package br.com.delivery.services.category;
 
 import br.com.delivery.modules.category.Category;
+import br.com.delivery.records.category.CategoryRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface CategoryService {
 
     void deleteCategory(Long id);
 
-    Category updateCategory(Long id, Category category);
+    Category updateCategory(Long id, CategoryRecord dto);
 }

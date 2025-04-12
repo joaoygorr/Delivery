@@ -2,6 +2,8 @@ package br.com.delivery.services.category;
 
 import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.category.Category;
+import br.com.delivery.modules.category.mapper.CategoryMapper;
+import br.com.delivery.records.category.CategoryRecord;
 import br.com.delivery.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+
+    private final CategoryMapper categoryMapper;
 
     @Transactional
     @Override
@@ -41,9 +45,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional
     @Override
-    public Category updateCategory(Long id, Category entity) {
-        Category categoryUpdate = getById(id);
-        categoryUpdate.setName(entity.getName());
-        return categoryUpdate;
+    public Category updateCategory(Long id, CategoryRecord dto) {
+        Category entity = getById(id);
+        this.categoryMapper.updateCategory(dto, entity);
+        return entity;
     }
 }
