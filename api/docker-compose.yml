@@ -6,9 +6,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: "delivery"
+      POSTGRES_DB: "delivery"
+      POSTGRES_PASSWORD: "SuperPassword@22"
 
 #  api:
 #    build:
