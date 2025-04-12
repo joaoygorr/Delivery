@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+//TODO: TEMPORARIO
 @Component
 @RequiredArgsConstructor
 public class AdminInitializer implements CommandLineRunner {
