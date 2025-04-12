@@ -57,6 +57,6 @@ public class CategoryController {
     public ResponseEntity<CategoryRecord> editCategory(@PathVariable Long id, @RequestBody CategoryRecord categoryRecord) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(this.categoryMapper.toDto(
-                        this.categoryService.updateCategory(id, this.categoryMapper.toEntity(categoryRecord))));
+                        this.categoryService.updateCategory(id, categoryRecord)));
     }
 }
