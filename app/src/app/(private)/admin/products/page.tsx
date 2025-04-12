@@ -1,5 +1,5 @@
 "use client";
-import ProductEditDialog from "@/shared/components/admin/productDialog/productDialog";
+import ProductEditDialog from "@/shared/components/admin/dialogs/productDialog/productDialog";
 import {
   Box,
   Button,
@@ -10,23 +10,28 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./product.scss";
-import { productFormData } from "@/shared/schemas/types/types";
-import { productApi } from "@/shared/api/api";
+import {
+  categoryFormData,
+  productFormData,
+} from "@/shared/schemas/types/types";
+import { categoryApi, productApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<categoryFormData[]>([]);
+  const [products, setProducts] = useState<productFormData[]>([]);
 
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
     try {
       const formData = new FormData();
 
-      const valueMapper = (value: unknown): string | Blob => {
+      const valueMapper = (value: unknown): string | Blob | number => {
         switch (true) {
           case String(value).includes("R$"):
             return String(value)
@@ -38,6 +43,9 @@ export default function Page() {
 
           case typeof value === "object":
             return value instanceof File ? value : JSON.stringify(value);
+
+          case typeof value === "number":
+            return String(value);
 
           default:
             return "";
@@ -62,6 +70,16 @@ export default function Page() {
     }
   }
 
+  useEffect(() => {
+    async function getData() {
+      try {
+        const { data } = await categoryApi.getCategories();
+        setCategories(data?.content);
+      } catch (error: unknown) {}
+    }
+    getData();
+  }, []);
+
   return (
     <Box className="box-product">
       <Box className="box-header-product">
@@ -80,7 +98,7 @@ export default function Page() {
               ID
             </TableCell>
             <TableCell>Image</TableCell>
-            <TableCell>Nome</TableCell>
+            <TableCell>Nome do Produto</TableCell>
             <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
               Preço
             </TableCell>
@@ -95,6 +113,7 @@ export default function Page() {
       </Table>
 
       <ProductEditDialog
+        categories={categories}
         open={openDialog}
         onSave={handleSaveEditDialog}
         onClose={() => setOpenDialog(false)}
