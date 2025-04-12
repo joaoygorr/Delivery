@@ -7,10 +7,8 @@ import br.com.delivery.repositories.CategoryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,8 +28,8 @@ class CategoryServiceImplTest {
     @Mock
     private CategoryRepository categoryRepository;
 
-    @Spy
-    private CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
+    @Mock
+    private CategoryMapper categoryMapper;
 
     @Autowired
     @InjectMocks
@@ -95,6 +93,12 @@ class CategoryServiceImplTest {
         CategoryRecord categoryRecord = new CategoryRecord(1L,"Updated Category");
 
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(existingCategory));
+        doAnswer(invocation -> {
+            CategoryRecord dto = invocation.getArgument(0);
+            Category entity = invocation.getArgument(1);
+            entity.setName(dto.name());
+            return null;
+        }).when(categoryMapper).updateCategory(categoryRecord, existingCategory);
 
         Category updatedCategory = categoryService.updateCategory(1L, categoryRecord);
 
