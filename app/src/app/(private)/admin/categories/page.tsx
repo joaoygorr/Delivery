@@ -19,12 +19,13 @@ import { categoryApi } from "@/shared/api/api";
 import CategoryTableItem from "@/shared/components/admin/items/categoryTableItems/categoryTableItems";
 import { useQuery } from "@tanstack/react-query";
 import { IPagedResponse } from "@/shared/schemas/types/IPagedResponse";
+import { useCategoryMutations } from "@/shared/hooks/useCategoryMutations";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
-
+  const { createCategoryMutation } = useCategoryMutations();
   function handleSaveEditDialog(data: categoryFormData) {
     if (categoryToEdit) {
       handleEdit(data);
@@ -41,13 +42,9 @@ export default function Page() {
   const handleSave = async (data: categoryFormData) => {
     setLoading(true);
     try {
-      await categoryApi.createCategory(data);
+      await createCategoryMutation.mutateAsync(data);
       toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || "Erro na requisição.");
-      }
     } finally {
       setLoading(false);
     }
