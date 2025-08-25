@@ -1,4 +1,4 @@
-package br.com.delivery.records.user;
+package br.com.delivery.modules.user.records;
 
 import jakarta.validation.constraints.NotBlank;
 

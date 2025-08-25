@@ -1,4 +1,4 @@
-package br.com.delivery.records.product;
+package br.com.delivery.modules.product.records;
 
 import java.math.BigDecimal;
 

@@ -1,8 +1,8 @@
 package br.com.delivery.modules.user.mapper;
 
 import br.com.delivery.modules.user.User;
-import br.com.delivery.records.user.LoginRecord;
-import br.com.delivery.records.user.UserRecord;
+import br.com.delivery.modules.user.records.LoginRecord;
+import br.com.delivery.modules.user.records.UserRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

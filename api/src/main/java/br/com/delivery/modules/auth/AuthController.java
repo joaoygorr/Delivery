@@ -1,10 +1,10 @@
-package br.com.delivery.controllers;
+package br.com.delivery.modules.auth;
 
 import br.com.delivery.modules.user.mapper.UserMapper;
-import br.com.delivery.records.user.LoginRecord;
-import br.com.delivery.records.user.ResponseRecord;
-import br.com.delivery.records.user.UserRecord;
-import br.com.delivery.services.user.UserService;
+import br.com.delivery.modules.user.records.LoginRecord;
+import br.com.delivery.modules.user.records.ResponseRecord;
+import br.com.delivery.modules.user.records.UserRecord;
+import br.com.delivery.modules.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

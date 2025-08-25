@@ -2,9 +2,9 @@ package br.com.delivery.modules.product.mapper;
 
 import br.com.delivery.modules.category.Category;
 import br.com.delivery.modules.product.Product;
-import br.com.delivery.records.product.ProductRecord;
-import br.com.delivery.records.product.ProductResponseRecord;
-import br.com.delivery.repositories.CategoryRepository;
+import br.com.delivery.modules.product.records.ProductRecord;
+import br.com.delivery.modules.product.records.ProductResponseRecord;
+import br.com.delivery.modules.category.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

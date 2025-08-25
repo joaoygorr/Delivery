@@ -1,4 +1,4 @@
-package br.com.delivery.records.category;
+package br.com.delivery.modules.category.records;
 
 import jakarta.validation.constraints.NotBlank;
 

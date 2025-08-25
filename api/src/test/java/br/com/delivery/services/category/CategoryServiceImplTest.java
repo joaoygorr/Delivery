@@ -1,9 +1,10 @@
 package br.com.delivery.services.category;
 
 import br.com.delivery.modules.category.Category;
+import br.com.delivery.modules.category.CategoryServiceImpl;
 import br.com.delivery.modules.category.mapper.CategoryMapper;
-import br.com.delivery.records.category.CategoryRecord;
-import br.com.delivery.repositories.CategoryRepository;
+import br.com.delivery.modules.category.records.CategoryRecord;
+import br.com.delivery.modules.category.CategoryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

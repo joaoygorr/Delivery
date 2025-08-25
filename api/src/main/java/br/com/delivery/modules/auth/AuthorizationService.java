@@ -1,7 +1,7 @@
-package br.com.delivery.services.auth;
+package br.com.delivery.modules.auth;
 
 import br.com.delivery.modules.user.User;
-import br.com.delivery.repositories.UserRepository;
+import br.com.delivery.modules.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

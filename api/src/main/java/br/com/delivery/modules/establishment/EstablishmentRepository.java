@@ -1,6 +1,5 @@
-package br.com.delivery.repositories;
+package br.com.delivery.modules.establishment;
 
-import br.com.delivery.modules.establishment.Establishment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

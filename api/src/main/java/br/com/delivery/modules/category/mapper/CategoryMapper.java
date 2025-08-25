@@ -1,7 +1,7 @@
 package br.com.delivery.modules.category.mapper;
 
 import br.com.delivery.modules.category.Category;
-import br.com.delivery.records.category.CategoryRecord;
+import br.com.delivery.modules.category.records.CategoryRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

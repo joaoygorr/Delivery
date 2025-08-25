@@ -1,6 +1,5 @@
-package br.com.delivery.repositories;
+package br.com.delivery.modules.user;
 
-import br.com.delivery.modules.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

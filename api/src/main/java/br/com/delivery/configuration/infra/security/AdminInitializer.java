@@ -1,7 +1,7 @@
 package br.com.delivery.configuration.infra.security;
 
 import br.com.delivery.modules.user.User;
-import br.com.delivery.repositories.UserRepository;
+import br.com.delivery.modules.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

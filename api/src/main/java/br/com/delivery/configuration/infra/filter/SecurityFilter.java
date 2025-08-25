@@ -2,8 +2,8 @@ package br.com.delivery.configuration.infra.filter;
 
 import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.user.User;
-import br.com.delivery.repositories.UserRepository;
-import br.com.delivery.services.auth.TokenService;
+import br.com.delivery.modules.user.UserRepository;
+import br.com.delivery.modules.auth.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,9 +1,8 @@
-package br.com.delivery.controllers;
+package br.com.delivery.modules.product;
 
 import br.com.delivery.modules.product.mapper.ProductMapper;
-import br.com.delivery.records.product.ProductRecord;
-import br.com.delivery.records.product.ProductResponseRecord;
-import br.com.delivery.services.product.ProductService;
+import br.com.delivery.modules.product.records.ProductRecord;
+import br.com.delivery.modules.product.records.ProductResponseRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

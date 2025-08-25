@@ -1,10 +1,8 @@
-package br.com.delivery.services.category;
+package br.com.delivery.modules.category;
 
 import br.com.delivery.configuration.exceptions.Exception404;
-import br.com.delivery.modules.category.Category;
 import br.com.delivery.modules.category.mapper.CategoryMapper;
-import br.com.delivery.records.category.CategoryRecord;
-import br.com.delivery.repositories.CategoryRepository;
+import br.com.delivery.modules.category.records.CategoryRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

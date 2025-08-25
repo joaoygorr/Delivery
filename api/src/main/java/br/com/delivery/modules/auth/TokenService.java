@@ -1,4 +1,4 @@
-package br.com.delivery.services.auth;
+package br.com.delivery.modules.auth;
 
 import br.com.delivery.modules.user.User;
 

@@ -1,11 +1,9 @@
-package br.com.delivery.services.user;
+package br.com.delivery.modules.user;
 
 import br.com.delivery.configuration.exceptions.Exception401;
 import br.com.delivery.configuration.exceptions.Exception404;
-import br.com.delivery.modules.user.User;
-import br.com.delivery.records.user.ResponseRecord;
-import br.com.delivery.repositories.UserRepository;
-import br.com.delivery.services.auth.TokenService;
+import br.com.delivery.modules.user.records.ResponseRecord;
+import br.com.delivery.modules.auth.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

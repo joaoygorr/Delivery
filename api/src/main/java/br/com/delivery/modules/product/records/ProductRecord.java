@@ -1,4 +1,4 @@
-package br.com.delivery.records.product;
+package br.com.delivery.modules.product.records;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
