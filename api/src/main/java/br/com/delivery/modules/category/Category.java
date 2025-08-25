@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@Table(name = "Categories")
-@Entity(name = "Categories")
+@Table
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "idCategory")
+@EqualsAndHashCode(of = "id")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategory;
+    private Long id;
 
     @Column(nullable = false)
     private String name;

@@ -32,7 +32,7 @@ public abstract class ProductMapper  {
     }
 
     Long mapCategorytoLong(Category category) {
-        return category.getIdCategory();
+        return category.getId();
     }
 
     byte[] mapMultipartFileToByte(MultipartFile multipartFile) throws IOException {

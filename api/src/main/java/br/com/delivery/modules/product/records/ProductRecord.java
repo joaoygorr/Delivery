@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
-public record ProductRecord(Long idProduct,
+public record ProductRecord(Long id,
                             @NotBlank(message = "Nome não pode estar vazio") String name,
                             @NotNull(message = "Imagem não pode estar vazia") MultipartFile img,
                             @NotNull(message = "Preço não pode estar vazia") BigDecimal price,

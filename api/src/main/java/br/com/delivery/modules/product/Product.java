@@ -7,16 +7,16 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Data
-@Table(name = "Products")
-@Entity(name = "Products")
+@Table
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "idProduct")
+@EqualsAndHashCode(of = "id")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProduct;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

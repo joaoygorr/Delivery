@@ -11,16 +11,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Table(name = "Orders")
-@Entity(name = "Orders")
+@Table
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "idOrder")
+@EqualsAndHashCode(of = "id")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idOrder;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

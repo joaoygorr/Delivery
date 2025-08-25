@@ -14,6 +14,5 @@ public abstract class CategoryMapper {
 
     public abstract CategoryRecord toDto(Category category);
 
-    @Mapping(target = "idCategory", ignore = true)
     public abstract void updateCategory(CategoryRecord dto, @MappingTarget Category entity);
 }
