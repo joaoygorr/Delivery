@@ -1,8 +1,6 @@
 package br.com.delivery.modules.product;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import br.com.delivery.modules.crud.BaseRepository;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends BaseRepository<Product, Long> {
 }

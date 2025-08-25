@@ -1,8 +1,12 @@
 package br.com.delivery.modules.product;
 
 import br.com.delivery.modules.category.Category;
+import br.com.delivery.modules.crud.EntityBase;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -11,12 +15,9 @@ import java.math.BigDecimal;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@AttributeOverride(name = "id", column = @Column(name = "id_product"))
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+public class Product extends EntityBase {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

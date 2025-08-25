@@ -1,8 +1,6 @@
 package br.com.delivery.modules.establishment;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import br.com.delivery.modules.crud.BaseRepository;
 
-@Repository
-public interface EstablishmentRepository extends JpaRepository<Establishment, Long> {
+public interface EstablishmentRepository extends BaseRepository<Establishment, Long> {
 }
