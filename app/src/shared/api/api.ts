@@ -52,7 +52,7 @@ export class Api {
     }
 
     async createProduct(product: FormData): Promise<productFormData> {
-        return await this.api.post("/create", product, {
+        return await this.api.post("/", product, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -60,11 +60,11 @@ export class Api {
     }
 
     async createCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
-        return await this.api.post("/create", category);
+        return await this.api.post("", category);
     }
 
     async getCategories(): Promise<IPagedResponse<categoryFormData[]>> {
-        const response = await this.api.get("/all");
+        const response = await this.api.get("");
         return response.data;
     }
 

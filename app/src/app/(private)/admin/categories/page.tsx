@@ -26,6 +26,7 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
   const { createCategoryMutation } = useCategoryMutations();
+
   function handleSaveEditDialog(data: categoryFormData) {
     if (categoryToEdit) {
       handleEdit(data);

@@ -6,18 +6,6 @@ import org.springframework.data.domain.Sort;
 
 public class Utils {
 
-    public static Class<?> getRetorno(String retorno) {
-        try {
-            if (!retorno.contains("modules"))
-                retorno = "br.com.delivery.modules." + retorno;
-
-            return Class.forName(retorno);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
     public static Pageable getUnpaged(Sort sort) {
         return Pageable.unpaged();
     }
