@@ -1,0 +1,19 @@
+meta {
+  name: All
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{URL}}/category
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: {{TOKEN}}
+}
+
+settings {
+  encodeUrl: true
+}

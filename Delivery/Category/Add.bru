@@ -1,0 +1,25 @@
+meta {
+  name: Add
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/category
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{TOKEN}}
+}
+
+body:json {
+  {
+    "name": "category"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
