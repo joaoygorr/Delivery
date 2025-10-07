@@ -102,7 +102,7 @@ export default function Page() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell>Nome da categoria</TableCell>
+            <TableCell>Categoria</TableCell>
 
             <TableCell className="box-actions">Ações</TableCell>
           </TableRow>

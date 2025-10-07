@@ -98,7 +98,7 @@ export default function Page() {
               ID
             </TableCell>
             <TableCell>Image</TableCell>
-            <TableCell>Nome do Produto</TableCell>
+            <TableCell>Produto</TableCell>
             <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
               Preço
             </TableCell>
