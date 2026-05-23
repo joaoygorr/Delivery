@@ -2,6 +2,7 @@ package br.com.delivery.modules.product;
 
 import br.com.delivery.modules.category.Category;
 import br.com.delivery.modules.crud.EntityBase;
+import br.com.delivery.modules.crud.Image;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,13 +27,14 @@ public class Product extends EntityBase {
     @Column(nullable = false)
     private String name;
 
-    @Lob
-    @Column(nullable = false)
-    private byte[] img;
-
-    @Column(nullable = false)
-    private BigDecimal price;
-
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    private Boolean complementary = false;
+
+    @Embedded
+    private Image image;
 }

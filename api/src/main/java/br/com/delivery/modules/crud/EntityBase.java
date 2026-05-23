@@ -22,4 +22,7 @@ public abstract class EntityBase {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private Boolean activate = true;
 }
