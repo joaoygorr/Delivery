@@ -1,14 +1,15 @@
-package br.com.delivery.modules.order.enuns;
+package br.com.delivery.modules.categoryComplementary.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum PaymentType {
-    CARD("Cartão"),
-    MONEY("Dinheiro");
+public enum ComplementType {
+    ADD("Adicionar"),
+    REMOVE("Remover"),
+    SWAP("Trocar");
 
     private final String description;
 
-    PaymentType(String description) {
+    ComplementType(String description) {
         this.description = description;
     }
 
