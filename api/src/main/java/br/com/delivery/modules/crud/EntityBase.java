@@ -22,9 +22,8 @@ public abstract class EntityBase {
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "boolean default true")
     private Boolean activate = true;
 }

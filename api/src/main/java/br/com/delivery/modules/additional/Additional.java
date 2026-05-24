@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 public class Additional extends EntityBase {
 
     @ManyToOne
-    @JoinColumn(name = "id_category_complementary", nullable = false)
+    @JoinColumn(name = "category_complementary_id", nullable = false)
     private CategoryComplementary categoryComplementary;
 
     @Column(nullable = false)

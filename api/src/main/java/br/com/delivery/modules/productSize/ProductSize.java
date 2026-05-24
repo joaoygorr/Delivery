@@ -27,14 +27,15 @@ public class ProductSize extends EntityBase {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(columnDefinition = "integer default 0")
     private Integer maxCombination = 1;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_product")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToMany
-    @JoinTable(name = "product_size_category_complementary", joinColumns = @JoinColumn(name = "id_product_size"),
-            inverseJoinColumns = @JoinColumn(name = "id_category_complementary"))
+    @JoinTable(name = "product_size_category_complementary", joinColumns = @JoinColumn(name = "product_size_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_complementary_id"))
     private List<CategoryComplementary> complementCategories;
 }

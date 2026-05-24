@@ -24,9 +24,12 @@ public class CategoryComplementary extends EntityBase {
     @Column(nullable = false)
     private ComplementType type;
 
+    @Column(columnDefinition = "integer default 0")
     private Integer min = 0;
 
+    @Column(columnDefinition = "integer default 0")
     private Integer max = 0;
 
+    @Column(columnDefinition = "integer default 0")
     private Integer maxFree = 0;
 }
