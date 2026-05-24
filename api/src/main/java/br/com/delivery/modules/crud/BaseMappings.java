@@ -12,6 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Mappings({
         @Mapping(target = "id", ignore = true),
-        @Mapping(target = "dateCreated", ignore = true)
+        @Mapping(target = "createdAt", ignore = true),
+        @Mapping(target = "updatedAt", ignore = true),
+        @Mapping(target = "activate", ignore = true)
 })
 public @interface BaseMappings { }

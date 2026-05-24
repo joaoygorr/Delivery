@@ -1,5 +1,6 @@
 package br.com.delivery.modules.crud;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class Image implements Serializable {
 
     private byte[] data;
 
+    @Column(name = "imagem_nome")
     private String name;
 
     private String type;
