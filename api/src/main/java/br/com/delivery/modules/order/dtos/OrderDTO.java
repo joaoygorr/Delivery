@@ -1,18 +1,19 @@
 package br.com.delivery.modules.order.dtos;
 
+import br.com.delivery.modules.crud.DtoBase;
 import br.com.delivery.modules.order.enuns.OrderStatus;
 import br.com.delivery.modules.order.enuns.PaymentType;
 import br.com.delivery.validators.interfaces.ValueEnum;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class OrderDTO {
-
-    private Long id;
+@EqualsAndHashCode(callSuper = true)
+public class OrderDTO extends DtoBase {
 
     @NotNull(message = "Usuário não pode estar em branco.")
     private Long user;

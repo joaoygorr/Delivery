@@ -8,4 +8,5 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.WARN)
 public abstract class CategoryMapper implements DtoMapper<Category, CategoryDTO> {
+    public abstract CategoryDTO toDto(Category entity);
 }

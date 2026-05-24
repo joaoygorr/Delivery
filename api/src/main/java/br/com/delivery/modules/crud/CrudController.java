@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -68,9 +70,11 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
     public ResponseEntity<Object> index(S specs, @ParameterObject Pageable page) {
         page = Utils.concatPagedId(page);
         if (page.isPaged()) {
-            return ResponseEntity.ok(repository.findAll(specs, page));
+            Page<D> data = repository.findAll(specs, page).map(mapper::toDto);
+            return ResponseEntity.ok(data);
         } else {
-            return ResponseEntity.ok(repository.findAll(specs, page.getSort()));
+            List<D> data = repository.findAll(specs, page.getSort()).stream().map(mapper::toDto).toList();
+            return ResponseEntity.ok(data);
         }
     }
 

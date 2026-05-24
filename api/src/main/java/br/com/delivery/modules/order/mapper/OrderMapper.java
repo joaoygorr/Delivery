@@ -21,13 +21,22 @@ public abstract class OrderMapper implements DtoMapper<Order, OrderDTO> {
     @Autowired
     private EstablishmentRepository establishmentRepository;
 
-    User mapUser(Long id) {
-        return this.userRepository.findById(id)
-                .orElseThrow(() -> new Exception404(String.format("Usuário com ID %d não encontrado", id)));
+    public User map(Long id) {
+        if (id == null) return null;
+        return userRepository.findById(id).orElseThrow(() -> new Exception404(String.format("Usuário com ID %d não encontrado", id)));
     }
 
-    Establishment mapEstablishment(Long id) {
-        return this.establishmentRepository.findById(id)
-                .orElseThrow(() -> new Exception404(String.format("Estabelecimento com ID %d não encontrado", id)));
+    public Long map(User user) {
+        return user != null ? user.getId() : null;
+    }
+
+    public Establishment mapEstablishment(Long id) {
+        if (id == null) return null;
+        return establishmentRepository.findById(id).orElseThrow(() ->
+                        new Exception404(String.format("Estabelecimento com ID %d não encontrado", id)));
+    }
+
+    public Long map(Establishment establishment) {
+        return establishment != null ? establishment.getId() : null;
     }
 }
