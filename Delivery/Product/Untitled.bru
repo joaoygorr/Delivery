@@ -1,0 +1,20 @@
+meta {
+  name: Untitled
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{URL}}/product
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: {{TOKEN}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

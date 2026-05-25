@@ -30,6 +30,7 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
     public Long map(Category category) {
         return category != null ? category.getId() : null;
     }
+
     byte[] mapMultipartFileToByte(MultipartFile multipartFile) throws IOException {
         return multipartFile.getBytes();
     }
