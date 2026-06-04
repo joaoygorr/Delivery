@@ -104,6 +104,7 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
         return ResponseEntity.ok(repository.save(entidadeSalva));
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     @Operation(summary = "Exclusão de entidade por ID.")
     @ResponseStatus(HttpStatus.NO_CONTENT)
