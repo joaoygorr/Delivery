@@ -1,23 +1,17 @@
 meta {
-  name: Add
+  name: ID
   type: http
-  seq: 1
+  seq: 3
 }
 
-post {
-  url: {{URL}}/category
-  body: json
+get {
+  url: {{URL}}/category/1
+  body: none
   auth: inherit
 }
 
 headers {
   Authorization: {{TOKEN}}
-}
-
-body:json {
-  {
-    "name": "teste"
-  }
 }
 
 settings {

@@ -3,6 +3,7 @@ package br.com.delivery.modules.additional;
 
 import br.com.delivery.modules.categoryComplementary.CategoryComplementary;
 import br.com.delivery.modules.crud.EntityBase;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_additional"))
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Additional extends EntityBase {
 

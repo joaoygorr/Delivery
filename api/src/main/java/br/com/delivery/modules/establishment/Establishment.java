@@ -1,6 +1,7 @@
 package br.com.delivery.modules.establishment;
 
 import br.com.delivery.modules.crud.EntityBase;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_establishment"))
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Establishment extends EntityBase {
 

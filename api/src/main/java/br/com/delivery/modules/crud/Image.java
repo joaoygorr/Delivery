@@ -1,5 +1,6 @@
 package br.com.delivery.modules.crud;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Image implements Serializable {
 
     private String urlImage;

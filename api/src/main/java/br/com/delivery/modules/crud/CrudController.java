@@ -41,8 +41,6 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
 
     private Class<T> type;
 
-    private static final String PARAM_ID = "/{id}";
-
     @SuppressWarnings("unchecked")
     public CrudController() {
         this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -70,11 +68,9 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
     public ResponseEntity<Object> index(S specs, @ParameterObject Pageable page) {
         page = Utils.concatPagedId(page);
         if (page.isPaged()) {
-            Page<D> data = repository.findAll(specs, page).map(mapper::toDto);
-            return ResponseEntity.ok(data);
+            return ResponseEntity.ok(repository.findAll(specs, page));
         } else {
-            List<D> data = repository.findAll(specs, page.getSort()).stream().map(mapper::toDto).toList();
-            return ResponseEntity.ok(data);
+            return ResponseEntity.ok(repository.findAll(specs, page.getSort()));
         }
     }
 

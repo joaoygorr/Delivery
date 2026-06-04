@@ -3,6 +3,7 @@ package br.com.delivery.modules.productSize;
 import br.com.delivery.modules.categoryComplementary.CategoryComplementary;
 import br.com.delivery.modules.crud.EntityBase;
 import br.com.delivery.modules.product.Product;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_product_size"))
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class ProductSize extends EntityBase {
 

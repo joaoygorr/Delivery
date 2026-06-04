@@ -5,6 +5,7 @@ import br.com.delivery.modules.establishment.Establishment;
 import br.com.delivery.modules.order.enuns.OrderStatus;
 import br.com.delivery.modules.order.enuns.PaymentType;
 import br.com.delivery.modules.user.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_order"))
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Order extends EntityBase {
 

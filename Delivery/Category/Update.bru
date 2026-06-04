@@ -1,17 +1,23 @@
 meta {
-  name: Untitled
+  name: Update
   type: http
-  seq: 1
+  seq: 4
 }
 
-get {
-  url: {{URL}}/product
-  body: none
+put {
+  url: {{URL}}/category/1
+  body: json
   auth: inherit
 }
 
 headers {
   Authorization: {{TOKEN}}
+}
+
+body:json {
+  {
+    "name": "ola"
+  }
 }
 
 settings {
