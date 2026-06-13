@@ -17,10 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public void deleteCategory(Long idCategory) {
-        if (idCategory == null) {
-            throw new Exception400("O ID da categoria é obrigatório.");
-        }
-
         if (productRepository.existsByCategoryId(idCategory)) {
             throw new Exception400("Não é possível excluir a categoria porque existem produtos vinculados.");
         }

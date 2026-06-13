@@ -9,10 +9,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/category")
@@ -24,9 +22,18 @@ public class CategoryController extends CrudController<Category, CategoryReposit
     private final CategoryService categoryService;
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Exclusão de entidade por ID.")
+    @Override
+    @Operation(summary = "Exclusão de categoria por ID.")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(Long id) {
+    public void delete(@PathVariable Long id) {
         categoryService.deleteCategory(id);
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar categoria por ID.")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Object> show(@PathVariable Long id) {
+        return ResponseEntity.ok(categoryService.findByCategory(id));
     }
 }
