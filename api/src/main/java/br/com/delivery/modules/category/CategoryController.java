@@ -34,6 +34,6 @@ public class CategoryController extends CrudController<Category, CategoryReposit
     @Operation(summary = "Buscar categoria por ID.")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> show(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.findByCategory(id));
+        return ResponseEntity.ok(categoryService.findCategory(id));
     }
 }

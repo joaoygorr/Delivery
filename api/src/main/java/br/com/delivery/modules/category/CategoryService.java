@@ -4,5 +4,5 @@ public interface CategoryService {
 
     void deleteCategory(Long idCategory);
 
-    Category findByCategory(Long idCategory);
+    Category findCategory(Long idCategory);
 }

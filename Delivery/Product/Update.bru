@@ -1,0 +1,26 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{URL}}/category/1
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{TOKEN}}
+}
+
+body:json {
+  {
+    "name": "ola"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

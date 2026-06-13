@@ -1,0 +1,26 @@
+meta {
+  name: Add
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{URL}}/category
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: {{TOKEN}}
+}
+
+body:json {
+  {
+    "name": "teste"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -22,9 +22,8 @@ public class ProductDTO extends DtoBase {
     @NotNull(message = "Preço não pode estar vazio")
     private BigDecimal price;
 
-    @NotBlank(message = "Descrição não pode estar vazia")
     private String description;
 
     @NotNull(message = "Categoria não pode estar vazia")
-    private Long category;
+    private Long categoryId;
 }

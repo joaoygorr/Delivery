@@ -1,6 +1,7 @@
 package br.com.delivery.modules.category;
 
 import br.com.delivery.configuration.exceptions.Exception400;
+import br.com.delivery.configuration.exceptions.Exception404;
 import br.com.delivery.modules.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-
     private final ProductRepository productRepository;
 
     @Transactional
@@ -21,14 +21,15 @@ public class CategoryServiceImpl implements CategoryService {
             throw new Exception400("Não é possível excluir a categoria porque existem produtos vinculados.");
         }
 
-        Category category = findByCategory(idCategory);
+        Category category = findCategory(idCategory);
         categoryRepository.delete(category);
     }
 
-    public Category findByCategory(Long idCateogry) {
+    @Override
+    public Category findCategory(Long idCateogry) {
         if (idCateogry == null) {
             throw new Exception400("O ID da categoria é obrigatório.");
         }
-        return categoryRepository.findById(idCateogry).orElseThrow(() -> new Exception400("Categoria não encontrada."));
+        return categoryRepository.findById(idCateogry).orElseThrow(() -> new Exception404("Categoria não encontrada."));
     }
 }
