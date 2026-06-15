@@ -1,15 +1,14 @@
 package br.com.delivery.modules.crud;
 
+import br.com.delivery.configuration.exceptions.ResourceNotFoundException;
 import br.com.delivery.utils.Utils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
@@ -18,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -90,16 +87,15 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
     @Operation(summary = "Buscar entidade por ID.")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> show(@PathVariable @Parameter(description = "ID da entidade a ser buscada.") Long id) {
-        Optional<T> obj = this.repository.findById(id);
-        return obj.<ResponseEntity<Object>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        T obj = findOrFail(id);
+        return ResponseEntity.ok(obj);
     }
 
     @Transactional
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar entidade por ID.")
     public ResponseEntity<T> update(@RequestBody @Valid D dto, @PathVariable @Parameter(description = "ID da entidade a ser atualizada.") Long id) {
-        T entidadeSalva = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada com ID " + id));
+        T entidadeSalva = findOrFail(id);
         entidadeSalva = mapper.updateFromDto(entidadeSalva, dto);
         return ResponseEntity.ok(repository.save(entidadeSalva));
     }
@@ -109,10 +105,19 @@ public abstract class CrudController<T extends EntityBase, R extends BaseReposit
     @Operation(summary = "Exclusão de entidade por ID.")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @Parameter(description = "ID da entidade a ser excluída.") Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (org.springframework.dao.EmptyResultDataAccessException e) {
-            // Ignora se o registro não existe
-        }
+       T entity = findOrFail(id);
+       repository.delete(entity);
+    }
+
+    protected T findOrFail(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(getEntityName(), id));
+    }
+
+    protected String getEntityName() {
+        return switch (type.getSimpleName()) {
+            case "Category" -> "Categoria";
+            case "Product" -> "Produto";
+            default -> type.getSimpleName();
+        };
     }
 }

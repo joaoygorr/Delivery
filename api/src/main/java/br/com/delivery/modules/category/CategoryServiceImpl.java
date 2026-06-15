@@ -17,11 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public void deleteCategory(Long idCategory) {
-        if (productRepository.existsByCategoryId(idCategory)) {
+        Category category = findCategory(idCategory);
+
+        if (productRepository.existsByCategoryId(category.getId())) {
             throw new Exception400("Não é possível excluir a categoria porque existem produtos vinculados.");
         }
-
-        Category category = findCategory(idCategory);
         categoryRepository.delete(category);
     }
 

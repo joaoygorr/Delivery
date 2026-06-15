@@ -28,12 +28,4 @@ public class CategoryController extends CrudController<Category, CategoryReposit
     public void delete(@PathVariable Long id) {
         categoryService.deleteCategory(id);
     }
-
-    @Override
-    @GetMapping("/{id}")
-    @Operation(summary = "Buscar categoria por ID.")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Object> show(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.findCategory(id));
-    }
 }
