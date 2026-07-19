@@ -13,7 +13,7 @@ type Props = {
 export default function CategoryTableItem({ item, onDelete, onEdit }: Props) {
   return (
     <TableRow hover>
-      <TableCell>{item.idCategory}</TableCell>
+      <TableCell>{item.id}</TableCell>
       <TableCell>{item.name}</TableCell>
 
       <TableCell className="box-actions-icons">
