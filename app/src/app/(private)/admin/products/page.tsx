@@ -81,14 +81,14 @@ export default function Page() {
       try {
         const response = await categoryApi.getCategories();
         setCategories(response.content);
-      } catch (error: unknown) {}
+      } catch (error: unknown) { }
     }
     getData();
   }, []);
 
-  const handleEditCategory = (category: productFormData) => {};
+  const handleEditCategory = (category: productFormData) => { };
 
-  const handleDeleteCategory = async (data: productFormData) => {};
+  const handleDeleteCategory = async (data: productFormData) => { };
 
   return (
     <Box sx={{ my: 3 }}>

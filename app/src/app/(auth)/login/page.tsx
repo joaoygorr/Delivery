@@ -147,7 +147,7 @@ export default function Page() {
 
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={{ fontWeight: 400, fontSize: ".875rem", lineHeight: 1.5 }}>
-          Não tem uma conta?{" "}
+          Não tem uma conta?
           <MuiLink
             href="/register"
             variant="body2"
