@@ -77,14 +77,14 @@ export default function Page() {
   };
 
   const handleDeleteCategory = async (data: categoryFormData) => {
-    if (!data?.idCategory) return;
+    if (!data?.id) return;
 
     try {
-      await categoryApi.deleteObject(data.idCategory);
+      await categoryApi.deleteObject(data.id);
       toast.success("Categoria excluída com sucesso");
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
-        toast.error(error.message);
+        toast.error(error.response?.data?.error || error.message);
       }
     }
   };
@@ -99,8 +99,12 @@ export default function Page() {
       </Box>
 
       <Table>
-        <TableHead>
-          <TableRow>
+        <TableHead sx={{
+          '& .MuiTableCell-root': {
+            fontWeight: 'bold',
+          },
+        }}>
+          <TableRow >
             <TableCell>ID</TableCell>
             <TableCell>Categoria</TableCell>
 
@@ -111,7 +115,7 @@ export default function Page() {
         <TableBody>
           {categories?.content?.map((item) => (
             <CategoryTableItem
-              key={item.idCategory}
+              key={item.id}
               item={item}
               onDelete={handleDeleteCategory}
               onEdit={handleEditCategory}

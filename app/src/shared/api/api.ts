@@ -59,6 +59,12 @@ export class Api {
         });
     }
 
+    async getProducts(): Promise<IPagedResponse<productFormData[]>> {
+        const response = await this.api.get("");
+        return response.data;
+    }
+
+    //CATEGORIES
     async createCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
         return await this.api.post("", category);
     }
@@ -68,12 +74,12 @@ export class Api {
         return response.data;
     }
 
-    async deleteObject(id: number): Promise<void> {
-        return await this.api.delete(`/${id}`);
+    async updateCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
+        return await this.api.put(`/${Number(category.id)}`, category);
     }
 
-    async updateCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
-        return await this.api.put(`/${Number(category.idCategory)}`, category);
+    async deleteObject(id: number): Promise<void> {
+        return await this.api.delete(`/${id}`);
     }
 }
 

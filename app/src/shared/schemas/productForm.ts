@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const createProductFormSchema = z.object({
-    idProduct: z.number().optional(),
+    id: z.number().optional(),
     name: z.string()
         .trim()
         .nonempty("O nome do produto é obrigatório")

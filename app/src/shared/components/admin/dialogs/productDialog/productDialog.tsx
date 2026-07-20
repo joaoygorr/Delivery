@@ -183,7 +183,7 @@ export default function ProductDialog({
               {...register("categoryId")}
             >
               {categories?.map((category) => (
-                <MenuItem key={category.idCategory} value={category.idCategory}>
+                <MenuItem key={category.id} value={category.id}>
                   {category.name}
                 </MenuItem>
               ))}

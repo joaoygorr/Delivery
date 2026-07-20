@@ -19,19 +19,22 @@ import {
 import { categoryApi, productApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { IPagedResponse } from "@/shared/schemas/types/IPagedResponse";
+import ProductTableItem from "@/shared/components/admin/items/productTableItems/productTableItem";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<categoryFormData[]>([]);
-  const [products, setProducts] = useState<productFormData[]>([]);
+  // const [products, setProducts] = useState<productFormData[]>([]);
 
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
     try {
       const formData = new FormData();
 
-      const valueMapper = (value: unknown): string | Blob | number => {
+      const valueMapper = (value: unknown): string | Blob => {
         switch (true) {
           case String(value).includes("R$"):
             return String(value)
@@ -70,15 +73,38 @@ export default function Page() {
     }
   }
 
+  const { data: products } = useQuery<IPagedResponse<productFormData[]>>({
+    queryKey: ["products"],
+    queryFn: () => productApi.getProducts()
+  })
+
   useEffect(() => {
     async function getData() {
       try {
-        const { data } = await categoryApi.getCategories();
-        setCategories(data?.content);
-      } catch (error: unknown) {}
+        const response = await categoryApi.getCategories();
+        setCategories(response.content);
+      } catch (error: unknown) { }
     }
     getData();
   }, []);
+
+  const handleEditCategory = (category: productFormData) => {
+    // setCategoryToEdit(category);
+    // setOpenDialog(true);
+  };
+
+  const handleDeleteCategory = async (data: productFormData) => {
+    // if (!data?.id) return;
+
+    // try {
+    //   await categoryApi.deleteObject(data.id);
+    //   toast.success("Categoria excluída com sucesso");
+    // } catch (error: unknown) {
+    //   if (error instanceof AxiosError) {
+    //     toast.error(error.response?.data?.error || error.message);
+    //   }
+    // }
+  };
 
   return (
     <Box className="box-product">
@@ -90,7 +116,11 @@ export default function Page() {
       </Box>
 
       <Table>
-        <TableHead>
+        <TableHead sx={{
+          '& .MuiTableCell-root': {
+            fontWeight: 'bold',
+          },
+        }}>
           <TableRow>
             <TableCell
               sx={{ width: 50, display: { xs: "none", md: "table-cell" } }}
@@ -105,11 +135,26 @@ export default function Page() {
             <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
               Categoria
             </TableCell>
-            <TableCell sx={{ xs: 50, md: 130 }}>Ações</TableCell>
+            <TableCell align="center"
+              sx={{
+                width: {
+                  xs: 50,
+                  md: 130,
+                },
+              }}>Ações</TableCell>
           </TableRow>
         </TableHead>
 
-        <TableBody></TableBody>
+        <TableBody>
+          {products?.content?.map((item) => (
+            <ProductTableItem
+              key={item.id}
+              item={item}
+              onDelete={handleDeleteCategory}
+              onEdit={handleEditCategory}
+            />
+          ))}
+        </TableBody>
       </Table>
 
       <ProductEditDialog
