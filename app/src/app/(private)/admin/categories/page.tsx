@@ -12,8 +12,6 @@ import {
 import { useState } from "react";
 import CategoryDialog from "@/app/(private)/admin/categories/_components/categoryDialog/categoryDialog";
 import { categoryFormData } from "@/shared/types/types";
-import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { categoryApi } from "@/shared/api/api";
 import CategoryTableItem from "@/app/(private)/admin/categories/_components/categoryTableItems/categoryTableItems";
 import { useQuery } from "@tanstack/react-query";
@@ -24,7 +22,9 @@ export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
-  const { createCategoryMutation } = useCategoryMutations();
+  const { createCategoryMutation, updateCategoryMutation,
+    deleteCategoryMutation
+  } = useCategoryMutations();
 
   function handleSaveEditDialog(data: categoryFormData) {
     if (categoryToEdit) {
@@ -43,26 +43,18 @@ export default function Page() {
     setLoading(true);
     try {
       await createCategoryMutation.mutateAsync(data);
-      toast.success("Categoria criada com sucesso!");
       setOpenDialog(false);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleEdit = async (data: categoryFormData) => {
-    setLoading(true);
-    try {
-      await categoryApi.updateCategory(data);
-      toast.success("Categoria criada com sucesso!");
-      setOpenDialog(false);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || "Erro na requisição.");
-      }
-    } finally {
-      setLoading(false);
-    }
+  const handleEdit = (data: categoryFormData) => {
+    updateCategoryMutation.mutate(data, {
+      onSuccess: () => {
+        setOpenDialog(false);
+      },
+    });
   };
 
   const handleNewCategory = () => {
@@ -76,16 +68,8 @@ export default function Page() {
   };
 
   const handleDeleteCategory = async (data: categoryFormData) => {
-    if (!data?.id) return;
-
-    try {
-      await categoryApi.deleteObject(data.id);
-      toast.success("Categoria excluída com sucesso");
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || error.message);
-      }
-    }
+    if (!data.id) return;
+    await deleteCategoryMutation.mutateAsync(data.id);
   };
 
   return (

@@ -25,20 +25,76 @@ export const useCategoryMutations = () => {
 
                     return {
                         content: [category],
-                        page: { size: 1, number: 0, totalElements: 1, totalPages: 1 },
+                        page: {
+                            size: 1,
+                            number: 0,
+                            totalElements: 1,
+                            totalPages: 1,
+                        },
                     };
                 }
             );
+            toast.success("Categoria criada com sucesso!");
         },
         onError: (error) => {
             if (error instanceof AxiosError) {
-                toast.error(error.response?.data?.error || "Erro na requisição Post.");
+                toast.error(error.response?.data?.error || "Erro na requisição.");
             }
         },
     });
 
+    const updateCategoryMutation = useMutation({
+        mutationFn: (data: categoryFormData) => categoryApi.updateCategory(data),
+        onSuccess: (updatedCategory) => {
+            const category = updatedCategory.data;
+
+            queryClient.setQueryData<IPagedResponse<categoryFormData[]>>(
+                ["categories"],
+                (oldData) => {
+                    if (!oldData) return oldData;
+
+                    return {
+                        ...oldData,
+                        content: oldData.content.map((item) =>
+                            item.id === category.id ? category : item
+                        ),
+                    };
+                }
+            );
+            toast.success("Categoria atualizada com sucesso!");
+        },
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data?.error || "Erro na requisição.");
+            }
+        },
+    });
+
+    const deleteCategoryMutation = useMutation({
+        mutationFn: (id: number) => categoryApi.deleteObject(id),
+        onSuccess: (_, id) => {
+            queryClient.setQueryData<IPagedResponse<categoryFormData[]>>(
+                ["categories"],
+                (oldData) => {
+                    if (!oldData) return oldData;
+                    return {
+                        ...oldData,
+                        content: oldData.content.filter((item) => item.id !== id),
+                    };
+                }
+            );
+            toast.success("Categoria excluída com sucesso!");
+        },
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data?.error || "Erro ao excluir categoria.");
+            }
+        },
+    });
 
     return {
-        createCategoryMutation
+        createCategoryMutation,
+        updateCategoryMutation,
+        deleteCategoryMutation
     }
 }

@@ -26,6 +26,8 @@ export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<categoryFormData[]>([]);
+  const [productToEdit, setProductToEdit] = useState<productFormData>();
+
 
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
@@ -86,9 +88,28 @@ export default function Page() {
     getData();
   }, []);
 
-  const handleEditCategory = (category: productFormData) => { };
+  const handleNewProduct = () => {
+    setProductToEdit(undefined);
+    setOpenDialog(true);
+  }
 
-  const handleDeleteCategory = async (data: productFormData) => { };
+  const handleEditProduct = (product: productFormData) => {
+    setProductToEdit(product)
+    setOpenDialog(true);
+  };
+
+  const handleDeleteProduct = async (data: productFormData) => {
+    if (!data.id) return;
+
+    try {
+      await productApi.deleteObject(data.id);
+      toast.success("Produto excluída com sucesso");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.error || error.message);
+      }
+    }
+  };
 
   return (
     <Box sx={{ my: 3 }}>
@@ -96,7 +117,7 @@ export default function Page() {
         <Typography component="h5" variant="h5" sx={{ color: "#555", mr: 2 }}>
           Produtos
         </Typography>
-        <Button onClick={() => setOpenDialog(!openDialog)}>Novo Produto</Button>
+        <Button onClick={handleNewProduct}>Novo Produto</Button>
       </Box>
 
       <Table>
@@ -129,8 +150,8 @@ export default function Page() {
             <ProductTableItem
               key={item.id}
               item={item}
-              onDelete={handleDeleteCategory}
-              onEdit={handleEditCategory}
+              onDelete={handleDeleteProduct}
+              onEdit={handleEditProduct}
             />
           ))}
         </TableBody>
