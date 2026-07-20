@@ -11,15 +11,15 @@ import {
 } from "@mui/material";
 import "./category.scss";
 import { useState } from "react";
-import CategoryDialog from "@/shared/components/admin/dialogs/categoryDialog/categoryDialog";
-import { categoryFormData } from "@/shared/schemas/types/types";
+import CategoryDialog from "@/app/(private)/admin/categories/_components/categoryDialog/categoryDialog";
+import { categoryFormData } from "@/shared/types/types";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { categoryApi } from "@/shared/api/api";
-import CategoryTableItem from "@/shared/components/admin/items/categoryTableItems/categoryTableItems";
+import CategoryTableItem from "@/app/(private)/admin/categories/_components/categoryTableItems/categoryTableItems";
 import { useQuery } from "@tanstack/react-query";
-import { IPagedResponse } from "@/shared/schemas/types/IPagedResponse";
-import { useCategoryMutations } from "@/shared/hooks/useCategoryMutations";
+import { IPagedResponse } from "@/shared/types/IPagedResponse";
+import { useCategoryMutations } from "@/app/(private)/admin/categories/_hooks/useCategoryMutations";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);

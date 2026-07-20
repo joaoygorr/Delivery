@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { categoryFormData } from "../schemas/types/types";
-import { categoryApi } from "../api/api";
+import { categoryFormData } from "@/shared/types/types";
+import { categoryApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { IPagedResponse } from "../schemas/types/IPagedResponse";
+import { IPagedResponse } from "@/shared/types/IPagedResponse";
 
 export const useCategoryMutations = () => {
     const queryClient = useQueryClient();

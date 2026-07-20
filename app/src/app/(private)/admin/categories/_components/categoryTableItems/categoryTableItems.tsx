@@ -1,5 +1,5 @@
 "use client";
-import { categoryFormData } from "@/shared/schemas/types/types";
+import { categoryFormData } from "@/shared/types/types";
 import { Delete, Edit } from "@mui/icons-material";
 import { Button, TableCell, TableRow } from "@mui/material";
 import "./categoryTable.scss";

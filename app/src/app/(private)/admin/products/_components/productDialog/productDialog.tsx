@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import {
   categoryFormData,
   productFormData,
-} from "@/shared/schemas/types/types";
+} from "@/shared/types/types";
 import handlePriceChange from "@/shared/utils/priceMask";
 
 type Props = {

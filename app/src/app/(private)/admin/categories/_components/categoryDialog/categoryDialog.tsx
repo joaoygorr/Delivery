@@ -1,6 +1,6 @@
 "use client";
-import createCategoryFormSchema from "@/shared/schemas/cateogryForm";
-import { categoryFormData } from "@/shared/schemas/types/types";
+import createCategoryFormSchema from "@/shared/schemas/categoryForm";
+import { categoryFormData } from "@/shared/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,

@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-import { authFormData, categoryFormData, productFormData } from "../schemas/types/types";
-import { IResponse } from "../schemas/types/IResponse";
-import { IPagedResponse } from "../schemas/types/IPagedResponse";
+import { authFormData, categoryFormData, productFormData } from "../types/types";
+import { IResponse } from "../types/IResponse";
+import { IPagedResponse } from "../types/IPagedResponse";
 
 export class Api {
     private api: AxiosInstance;

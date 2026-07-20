@@ -1,5 +1,5 @@
 "use client";
-import ProductEditDialog from "@/shared/components/admin/dialogs/productDialog/productDialog";
+import ProductEditDialog from "@/app/(private)/admin/products/_components/productDialog/productDialog";
 import {
   Box,
   Button,
@@ -15,13 +15,13 @@ import "./product.scss";
 import {
   categoryFormData,
   productFormData,
-} from "@/shared/schemas/types/types";
+} from "@/shared/types/types";
 import { categoryApi, productApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { IPagedResponse } from "@/shared/schemas/types/IPagedResponse";
-import ProductTableItem from "@/shared/components/admin/items/productTableItems/productTableItem";
+import { IPagedResponse } from "@/shared/types/IPagedResponse";
+import ProductTableItem from "@/app/(private)/admin/products/_components/productTableItems/productTableItem";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);

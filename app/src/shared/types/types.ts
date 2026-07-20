@@ -1,7 +1,7 @@
 import { z } from "zod";
-import createAuthFormSchema from "../authForm";
-import createProductFormSchema from "../productForm";
-import createCategoryFormSchema from "../cateogryForm";
+import createAuthFormSchema from "../schemas/authForm";
+import createProductFormSchema from "../schemas/productForm";
+import createCategoryFormSchema from "../schemas/categoryForm";
 
 export type authFormData = z.infer<typeof createAuthFormSchema>;
 

@@ -1,4 +1,4 @@
-import { productFormData } from "@/shared/schemas/types/types";
+import { productFormData } from "@/shared/types/types";
 import { Box, Button, TableCell, TableRow } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 

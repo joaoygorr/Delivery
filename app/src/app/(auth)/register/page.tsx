@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/shared/api/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authFormData } from "@/shared/schemas/types/types";
+import { authFormData } from "@/shared/types/types";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useState } from "react";
