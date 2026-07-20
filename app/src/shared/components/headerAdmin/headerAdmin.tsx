@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import "./header.scss";
 import { Menu } from "@mui/icons-material";
 import HeaderDrawer from "./headerDrawer/headerDrawer";
 
@@ -35,14 +34,17 @@ export default function HeaderAdmin() {
             variant="h6"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link href="/" className="link">
+            <Link href="/" style={{ color: "#fff", textDecoration: "none" }}>
               Painel
             </Link>
           </Typography>
 
           <Box
-            sx={{ display: { xs: "none", sm: "block" } }}
-            className="box-nav"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              "& a": { textDecoration: "none" },
+              "& button": { color: "#fff" },
+            }}
           >
             <Link href="/orders">
               <Button>pedidos</Button>

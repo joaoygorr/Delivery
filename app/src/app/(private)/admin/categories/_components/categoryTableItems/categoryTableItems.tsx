@@ -2,7 +2,6 @@
 import { categoryFormData } from "@/shared/types/types";
 import { Delete, Edit } from "@mui/icons-material";
 import { Button, TableCell, TableRow } from "@mui/material";
-import "./categoryTable.scss";
 
 type Props = {
   item: categoryFormData;
@@ -16,7 +15,7 @@ export default function CategoryTableItem({ item, onDelete, onEdit }: Props) {
       <TableCell>{item.id}</TableCell>
       <TableCell>{item.name}</TableCell>
 
-      <TableCell className="box-actions-icons">
+      <TableCell sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Button onClick={() => onEdit(item)} size="small">
           <Edit />
         </Button>

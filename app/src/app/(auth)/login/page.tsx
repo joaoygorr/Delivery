@@ -10,7 +10,6 @@ import {
   Card,
   Divider,
 } from "@mui/material";
-import "./signIn.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import createAuthFormSchema from "@/shared/schemas/authForm";
@@ -52,18 +51,44 @@ export default function Page() {
   }
 
   return (
-    <Card variant="outlined" className="box-card">
-      <Typography component="h1" variant="h4" className="text-auth">
+    <Card
+      variant="outlined"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignSelf: "center",
+        width: "100%",
+        m: "auto",
+        gap: 2,
+        p: 4,
+        boxShadow:
+          "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
+        fontFamily: "Inter, sans-serif",
+      }}
+    >
+      <Typography
+        component="h1"
+        variant="h4"
+        sx={{
+          width: "100%",
+          fontSize: "clamp(2rem, 10vw, 2.15rem)",
+          color: "#555",
+          fontWeight: 600,
+          lineHeight: 1.5,
+        }}
+      >
         Login
       </Typography>
       <Box
         component="form"
-        className="box-form"
         noValidate
         onSubmit={handleSubmit(submitLogin)}
+        sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2 }}
       >
         <FormControl>
-          <FormLabel htmlFor="email">Email</FormLabel>
+          <FormLabel htmlFor="email" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            Email
+          </FormLabel>
           <TextField
             placeholder="your@email.com"
             autoComplete="email"
@@ -78,7 +103,9 @@ export default function Page() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor="password">Senha</FormLabel>
+          <FormLabel htmlFor="password" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            Senha
+          </FormLabel>
           <TextField
             type="password"
             placeholder="••••••"
@@ -101,21 +128,32 @@ export default function Page() {
           component="button"
           type="button"
           variant="body2"
-          className="link-forgot"
           onClick={() => setOpen(true)}
+          sx={{
+            alignSelf: "center",
+            fontWeight: 500,
+            color: "hsl(220, 30%, 6%)",
+            fontSize: ".875rem",
+            lineHeight: 1.43,
+          }}
         >
           Esqueceu sua senha?
         </MuiLink>
       </Box>
 
-      <Divider className="divider">
+      <Divider sx={{ color: "hsl(220, 20%, 35%)" }}>
         <Typography>ou</Typography>
       </Divider>
 
-      <Box className="box-auth-forgot">
-        <Typography>
+      <Box sx={{ textAlign: "center" }}>
+        <Typography sx={{ fontWeight: 400, fontSize: ".875rem", lineHeight: 1.5 }}>
           Não tem uma conta?{" "}
-          <MuiLink href="/register" variant="body2" component={Link}>
+          <MuiLink
+            href="/register"
+            variant="body2"
+            component={Link}
+            sx={{ fontWeight: 500, color: "hsl(220, 30%, 6%)", lineHeight: 1.43 }}
+          >
             Cadastrar-se
           </MuiLink>
         </Typography>

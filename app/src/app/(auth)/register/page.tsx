@@ -11,7 +11,6 @@ import {
   Divider,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import "./signUp.scss";
 import createAuthFormSchema from "@/shared/schemas/authForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/shared/api/api";
@@ -50,19 +49,39 @@ export default function Page() {
   }
 
   return (
-    <Card variant="outlined" className="box-card-register">
-      <Typography component="h1" variant="h4" className="text-auth-register">
+    <Card
+      variant="outlined"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignSelf: "center",
+        width: "100%",
+        p: 4,
+        gap: 2,
+        m: "auto",
+        boxShadow:
+          "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
+        fontFamily: "Inter, sans-serif",
+      }}
+    >
+      <Typography
+        component="h1"
+        variant="h4"
+        sx={{ color: "#555", width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+      >
         Cadastrar-se
       </Typography>
 
       <Box
         component="form"
-        className="box-form-register"
         noValidate
         onSubmit={handleSubmit(submitRegister)}
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
       >
         <FormControl>
-          <FormLabel htmlFor="userName">Nome Completo</FormLabel>
+          <FormLabel htmlFor="userName" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            Nome Completo
+          </FormLabel>
           <TextField
             placeholder="Jon Snow"
             autoComplete="userName"
@@ -77,7 +96,9 @@ export default function Page() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor="email">E-mail</FormLabel>
+          <FormLabel htmlFor="email" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            E-mail
+          </FormLabel>
           <TextField
             placeholder="your@email.com"
             autoComplete="email"
@@ -91,7 +112,9 @@ export default function Page() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor="password">Senha</FormLabel>
+          <FormLabel htmlFor="password" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            Senha
+          </FormLabel>
           <TextField
             placeholder="••••••"
             type="password"
@@ -106,7 +129,9 @@ export default function Page() {
         </FormControl>
 
         <FormControl>
-          <FormLabel htmlFor="confirmPassord">Confirme sua senha</FormLabel>
+          <FormLabel htmlFor="confirmPassord" sx={{ fontSize: ".875rem", mb: 0.5 }}>
+            Confirme sua senha
+          </FormLabel>
           <TextField
             type="password"
             placeholder="••••••"
@@ -125,14 +150,19 @@ export default function Page() {
         </Button>
       </Box>
 
-      <Divider className="divider">
+      <Divider sx={{ color: "hsl(220, 20%, 35%)" }}>
         <Typography>ou</Typography>
       </Divider>
 
-      <Box className="box-auth-login">
-        <Typography>
+      <Box sx={{ textAlign: "center" }}>
+        <Typography sx={{ fontWeight: 400, fontSize: ".875rem", lineHeight: 1.5 }}>
           Já tenho uma conta{" "}
-          <MuiLink href="/login" variant="body2" component={Link}>
+          <MuiLink
+            href="/login"
+            variant="body2"
+            component={Link}
+            sx={{ fontWeight: 500, color: "hsl(220, 30%, 6%)", lineHeight: 1.43 }}
+          >
             Login
           </MuiLink>
         </Typography>

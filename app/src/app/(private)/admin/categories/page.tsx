@@ -9,7 +9,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import "./category.scss";
 import { useState } from "react";
 import CategoryDialog from "@/app/(private)/admin/categories/_components/categoryDialog/categoryDialog";
 import { categoryFormData } from "@/shared/types/types";
@@ -90,25 +89,20 @@ export default function Page() {
   };
 
   return (
-    <Box className="box-category">
-      <Box className="box-header-category">
-        <Typography component="h5" variant="h5">
+    <Box sx={{ my: 3 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
+        <Typography component="h5" variant="h5" sx={{ color: "#555", mr: 2 }}>
           Categorias
         </Typography>
         <Button onClick={handleNewCategory}>Nova Categoria</Button>
       </Box>
 
       <Table>
-        <TableHead sx={{
-          '& .MuiTableCell-root': {
-            fontWeight: 'bold',
-          },
-        }}>
-          <TableRow >
+        <TableHead sx={{ "& .MuiTableCell-root": { fontWeight: "bold" } }}>
+          <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Categoria</TableCell>
-
-            <TableCell className="box-actions">Ações</TableCell>
+            <TableCell sx={{ textAlign: "center", width: 100 }}>Ações</TableCell>
           </TableRow>
         </TableHead>
 

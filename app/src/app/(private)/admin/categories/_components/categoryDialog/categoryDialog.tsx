@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import "./categoryDialog.scss";
 
 type Props = {
   open: boolean;
@@ -53,7 +52,7 @@ export default function CategoryDialog({
         <Box
           component="form"
           onSubmit={handleSubmit(onSave)}
-          className="box-form-category"
+          sx={{ display: "flex", flexDirection: "column", alignSelf: "center", gap: 2 }}
         >
           <FormControl>
             <FormLabel htmlFor="nameField">Nome</FormLabel>
@@ -70,7 +69,7 @@ export default function CategoryDialog({
             />
           </FormControl>
 
-          <Box className="box-form-button">
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button onClick={onClose} disabled={disable}>
               Cancelar
             </Button>

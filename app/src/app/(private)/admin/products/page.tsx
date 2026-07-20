@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import "./product.scss";
 import {
   categoryFormData,
   productFormData,
@@ -27,7 +26,6 @@ export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<categoryFormData[]>([]);
-  // const [products, setProducts] = useState<productFormData[]>([]);
 
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
@@ -75,52 +73,34 @@ export default function Page() {
 
   const { data: products } = useQuery<IPagedResponse<productFormData[]>>({
     queryKey: ["products"],
-    queryFn: () => productApi.getProducts()
-  })
+    queryFn: () => productApi.getProducts(),
+  });
 
   useEffect(() => {
     async function getData() {
       try {
         const response = await categoryApi.getCategories();
         setCategories(response.content);
-      } catch (error: unknown) { }
+      } catch (error: unknown) {}
     }
     getData();
   }, []);
 
-  const handleEditCategory = (category: productFormData) => {
-    // setCategoryToEdit(category);
-    // setOpenDialog(true);
-  };
+  const handleEditCategory = (category: productFormData) => {};
 
-  const handleDeleteCategory = async (data: productFormData) => {
-    // if (!data?.id) return;
-
-    // try {
-    //   await categoryApi.deleteObject(data.id);
-    //   toast.success("Categoria excluída com sucesso");
-    // } catch (error: unknown) {
-    //   if (error instanceof AxiosError) {
-    //     toast.error(error.response?.data?.error || error.message);
-    //   }
-    // }
-  };
+  const handleDeleteCategory = async (data: productFormData) => {};
 
   return (
-    <Box className="box-product">
-      <Box className="box-header-product">
-        <Typography component="h5" variant="h5">
+    <Box sx={{ my: 3 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
+        <Typography component="h5" variant="h5" sx={{ color: "#555", mr: 2 }}>
           Produtos
         </Typography>
         <Button onClick={() => setOpenDialog(!openDialog)}>Novo Produto</Button>
       </Box>
 
       <Table>
-        <TableHead sx={{
-          '& .MuiTableCell-root': {
-            fontWeight: 'bold',
-          },
-        }}>
+        <TableHead sx={{ "& .MuiTableCell-root": { fontWeight: "bold" } }}>
           <TableRow>
             <TableCell
               sx={{ width: 50, display: { xs: "none", md: "table-cell" } }}
@@ -135,13 +115,12 @@ export default function Page() {
             <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
               Categoria
             </TableCell>
-            <TableCell align="center"
-              sx={{
-                width: {
-                  xs: 50,
-                  md: 130,
-                },
-              }}>Ações</TableCell>
+            <TableCell
+              align="center"
+              sx={{ width: { xs: 50, md: 130 } }}
+            >
+              Ações
+            </TableCell>
           </TableRow>
         </TableHead>
 

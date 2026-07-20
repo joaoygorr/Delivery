@@ -19,7 +19,6 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import "./productDialog.scss";
 import { useEffect, useState } from "react";
 import {
   categoryFormData,
@@ -65,14 +64,14 @@ export default function ProductDialog({
           component="form"
           encType="multipart/form-data"
           onSubmit={handleSubmit(onSave)}
-          className="box-form-product"
+          sx={{ display: "flex", flexDirection: "column", alignSelf: "center", gap: 2 }}
         >
           <FormControl>
             <FormLabel>Escolha como deseja enviar a imagem</FormLabel>
             <RadioGroup
               value={uploadMethod}
               onChange={(e) => setUploadMethod(e.target.value)}
-              className="radio"
+              sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
             >
               <FormControlLabel
                 value="file"
@@ -192,7 +191,7 @@ export default function ProductDialog({
               <FormHelperText>{errors.categoryId.message}</FormHelperText>
             )}
           </FormControl>
-          <Box className="box-form-button">
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button onClick={onClose} disabled={disable}>
               Cancelar
             </Button>
