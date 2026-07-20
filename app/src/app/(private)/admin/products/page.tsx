@@ -28,7 +28,6 @@ export default function Page() {
   const [categories, setCategories] = useState<categoryFormData[]>([]);
   const [productToEdit, setProductToEdit] = useState<productFormData>();
 
-
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
     try {
