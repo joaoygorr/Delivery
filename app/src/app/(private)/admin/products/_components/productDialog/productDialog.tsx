@@ -32,6 +32,7 @@ type Props = {
   onSave: (event: productFormData) => void;
   disable: boolean;
   categories: categoryFormData[];
+  product?: productFormData
 };
 
 export default function ProductDialog({
@@ -40,6 +41,7 @@ export default function ProductDialog({
   onSave,
   disable,
   categories,
+  product
 }: Props) {
   const [uploadMethod, setUploadMethod] = useState<string>("file");
 
@@ -129,6 +131,7 @@ export default function ProductDialog({
               variant="standard"
               placeholder="Digite o nome do produto"
               fullWidth
+              defaultValue={product?.name}
               disabled={disable}
               color={errors?.name ? "error" : "primary"}
               helperText={errors.name?.message}
@@ -145,6 +148,7 @@ export default function ProductDialog({
               type="text"
               placeholder="Ex: R$ 19,90"
               fullWidth
+              defaultValue={product?.price}
               disabled={disable}
               color={errors?.price ? "error" : "primary"}
               {...register("price", {
@@ -165,6 +169,7 @@ export default function ProductDialog({
               rows={4}
               fullWidth
               disabled={disable}
+              defaultValue={product?.description}
               color={errors?.description ? "error" : "primary"}
               helperText={errors.description?.message}
               {...register("description")}
@@ -181,6 +186,9 @@ export default function ProductDialog({
               error={!!errors.categoryId}
               {...register("categoryId")}
             >
+              {product?.categoryId && (<MenuItem key={product.categoryId.id} value={product.categoryId.name}>
+                {product.categoryId.name}
+              </MenuItem>)}
               {categories?.map((category) => (
                 <MenuItem key={category.id} value={category.id}>
                   {category.name}

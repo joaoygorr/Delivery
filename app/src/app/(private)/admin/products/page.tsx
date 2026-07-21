@@ -28,6 +28,19 @@ export default function Page() {
   const [categories, setCategories] = useState<categoryFormData[]>([]);
   const [productToEdit, setProductToEdit] = useState<productFormData>();
 
+  function teste(data: productFormData) {
+    if (productToEdit) {
+      handleEditProduct(data);
+    } else {
+      handleSave(data);
+    }
+  }
+
+  const handleSave = async (data: productFormData) => {
+    setLoading(true);
+  }
+
+
   async function handleSaveEditDialog(data: productFormData) {
     setLoading(true);
     try {
@@ -157,9 +170,10 @@ export default function Page() {
       </Table>
 
       <ProductEditDialog
+        product={productToEdit}
         categories={categories}
         open={openDialog}
-        onSave={handleSaveEditDialog}
+        onSave={teste}
         onClose={() => setOpenDialog(false)}
         disable={loading}
       />
