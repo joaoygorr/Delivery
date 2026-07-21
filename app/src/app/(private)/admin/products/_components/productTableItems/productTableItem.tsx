@@ -9,13 +9,6 @@ type Props = {
 };
 
 export default function ProductTableItem({ item, onDelete, onEdit }: Props) {
-    const formatPrice = (value: number) => {
-        return `R$ ${value
-            .toFixed(2)
-            .replace(".", ",")
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-    };
-
     return (
         <TableRow hover>
             <TableCell>{item.id}</TableCell>
@@ -33,10 +26,10 @@ export default function ProductTableItem({ item, onDelete, onEdit }: Props) {
                 />
             </TableCell>
             <TableCell>{item.name}</TableCell>
-            <TableCell>{formatPrice(Number(item.price))}</TableCell>
+            <TableCell>{ }</TableCell>
             <TableCell>categoria</TableCell>
 
-            <TableCell className="box-actions-icons">
+            <TableCell>
                 <Button onClick={() => onEdit(item)} size="small">
                     <Edit />
                 </Button>
