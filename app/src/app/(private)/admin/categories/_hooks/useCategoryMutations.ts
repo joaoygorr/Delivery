@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { categoryFormData } from "@/shared/types/types";
+import { CategoryFormData } from "@/shared/types/types";
 import { categoryApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -9,11 +9,11 @@ export const useCategoryMutations = () => {
     const queryClient = useQueryClient();
 
     const createCategoryMutation = useMutation({
-        mutationFn: (data: categoryFormData) => categoryApi.createCategory(data),
+        mutationFn: (data: CategoryFormData) => categoryApi.createCategory(data),
         onSuccess: (newCategory) => {
             const category = newCategory.data;
 
-            queryClient.setQueryData<IPagedResponse<categoryFormData[]>>(
+            queryClient.setQueryData<IPagedResponse<CategoryFormData[]>>(
                 ["categories"],
                 (oldData) => {
                     if (oldData) {
@@ -44,11 +44,11 @@ export const useCategoryMutations = () => {
     });
 
     const updateCategoryMutation = useMutation({
-        mutationFn: (data: categoryFormData) => categoryApi.updateCategory(data),
+        mutationFn: (data: CategoryFormData) => categoryApi.updateCategory(data),
         onSuccess: (updatedCategory) => {
             const category = updatedCategory.data;
 
-            queryClient.setQueryData<IPagedResponse<categoryFormData[]>>(
+            queryClient.setQueryData<IPagedResponse<CategoryFormData[]>>(
                 ["categories"],
                 (oldData) => {
                     if (!oldData) return oldData;
@@ -73,7 +73,7 @@ export const useCategoryMutations = () => {
     const deleteCategoryMutation = useMutation({
         mutationFn: (id: number) => categoryApi.deleteObject(id),
         onSuccess: (_, id) => {
-            queryClient.setQueryData<IPagedResponse<categoryFormData[]>>(
+            queryClient.setQueryData<IPagedResponse<CategoryFormData[]>>(
                 ["categories"],
                 (oldData) => {
                     if (!oldData) return oldData;

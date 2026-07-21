@@ -3,8 +3,8 @@ import createAuthFormSchema from "../schemas/authForm";
 import createProductFormSchema from "../schemas/productForm";
 import createCategoryFormSchema from "../schemas/categoryForm";
 
-export type authFormData = z.infer<typeof createAuthFormSchema>;
+export type AuthFormData = z.infer<typeof createAuthFormSchema>;
 
-export type productFormData = z.infer<typeof createProductFormSchema>;
+export type ProductFormData = z.infer<typeof createProductFormSchema>;
 
-export type categoryFormData = z.infer<typeof createCategoryFormSchema>;
+export type CategoryFormData = z.infer<typeof createCategoryFormSchema>;

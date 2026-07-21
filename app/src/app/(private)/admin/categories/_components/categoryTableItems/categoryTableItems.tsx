@@ -1,12 +1,12 @@
 "use client";
-import { categoryFormData } from "@/shared/types/types";
+import { CategoryFormData } from "@/shared/types/types";
 import { Delete, Edit } from "@mui/icons-material";
-import { Button, TableCell, TableRow } from "@mui/material";
+import { IconButton, TableCell, TableRow } from "@mui/material";
 
 type Props = {
-  item: categoryFormData;
-  onEdit: (item: categoryFormData) => void;
-  onDelete: (item: categoryFormData) => void;
+  item: CategoryFormData;
+  onEdit: (item: CategoryFormData) => void;
+  onDelete: (item: CategoryFormData) => void;
 };
 
 export default function CategoryTableItem({ item, onDelete, onEdit }: Props) {
@@ -16,12 +16,12 @@ export default function CategoryTableItem({ item, onDelete, onEdit }: Props) {
       <TableCell>{item.name}</TableCell>
 
       <TableCell sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Button onClick={() => onEdit(item)} size="small">
+        <IconButton onClick={() => onEdit(item)} size="small" aria-label="Editar categoria">
           <Edit />
-        </Button>
-        <Button onClick={() => onDelete(item)} size="small">
+        </IconButton>
+        <IconButton onClick={() => onDelete(item)} size="small" aria-label="Excluir categoria">
           <Delete />
-        </Button>
+        </IconButton>
       </TableCell>
     </TableRow>
   );

@@ -32,13 +32,13 @@ export default function ForgotPassword({
         },
       }}
     >
-      <DialogTitle>Reset password</DialogTitle>
+      <DialogTitle>Recuperar senha</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
       >
         <DialogContentText>
-          Enter your account&apos;s email address, and we&apos;ll send you a
-          link to reset your password.
+          Insira o e-mail da sua conta e enviaremos um link para redefinir sua
+          senha.
         </DialogContentText>
         <OutlinedInput
           autoFocus
@@ -46,16 +46,15 @@ export default function ForgotPassword({
           margin="dense"
           id="email"
           name="email"
-          label="Email address"
-          placeholder="Email address"
+          placeholder="Endereço de e-mail"
           type="email"
           fullWidth
         />
       </DialogContent>
       <DialogActions sx={{ pb: 3, px: 3 }}>
-        <Button onClick={() => handleClose(false)}>Cancel</Button>
+        <Button onClick={() => handleClose(false)}>Cancelar</Button>
         <Button variant="contained" type="submit">
-          Continue
+          Enviar
         </Button>
       </DialogActions>
     </Dialog>

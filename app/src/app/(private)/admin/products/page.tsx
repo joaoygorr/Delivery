@@ -3,6 +3,7 @@ import ProductEditDialog from "@/app/(private)/admin/products/_components/produc
 import {
   Box,
   Button,
+  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -12,8 +13,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
-  categoryFormData,
-  productFormData,
+  CategoryFormData,
+  ProductFormData,
 } from "@/shared/types/types";
 import { categoryApi, productApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
@@ -25,10 +26,10 @@ import ProductTableItem from "@/app/(private)/admin/products/_components/product
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState<categoryFormData[]>([]);
-  const [productToEdit, setProductToEdit] = useState<productFormData>();
+  const [categories, setCategories] = useState<CategoryFormData[]>([]);
+  const [productToEdit, setProductToEdit] = useState<ProductFormData>();
 
-  function teste(data: productFormData) {
+  function teste(data: ProductFormData) {
     if (productToEdit) {
       handleEditProduct(data);
     } else {
@@ -36,12 +37,12 @@ export default function Page() {
     }
   }
 
-  const handleSave = async (data: productFormData) => {
+  const handleSave = async (data: ProductFormData) => {
     setLoading(true);
   }
 
 
-  async function handleSaveEditDialog(data: productFormData) {
+  async function handleSaveEditDialog(data: ProductFormData) {
     setLoading(true);
     try {
       const formData = new FormData();
@@ -85,7 +86,7 @@ export default function Page() {
     }
   }
 
-  const { data: products } = useQuery<IPagedResponse<productFormData[]>>({
+  const { data: products, isLoading: isLoadingProducts } = useQuery<IPagedResponse<ProductFormData[]>>({
     queryKey: ["products"],
     queryFn: () => productApi.getProducts(),
   });
@@ -105,12 +106,12 @@ export default function Page() {
     setOpenDialog(true);
   }
 
-  const handleEditProduct = (product: productFormData) => {
+  const handleEditProduct = (product: ProductFormData) => {
     setProductToEdit(product)
     setOpenDialog(true);
   };
 
-  const handleDeleteProduct = async (data: productFormData) => {
+  const handleDeleteProduct = async (data: ProductFormData) => {
     if (!data.id) return;
 
     try {
@@ -158,14 +159,22 @@ export default function Page() {
         </TableHead>
 
         <TableBody>
-          {products?.content?.map((item) => (
-            <ProductTableItem
-              key={item.id}
-              item={item}
-              onDelete={handleDeleteProduct}
-              onEdit={handleEditProduct}
-            />
-          ))}
+          {isLoadingProducts ? (
+            <TableRow>
+              <TableCell colSpan={6} align="center" sx={{ py: 4 }}>
+                <CircularProgress size={30} />
+              </TableCell>
+            </TableRow>
+          ) : (
+            products?.content?.map((item) => (
+              <ProductTableItem
+                key={item.id}
+                item={item}
+                onDelete={handleDeleteProduct}
+                onEdit={handleEditProduct}
+              />
+            ))
+          )}
         </TableBody>
       </Table>
 

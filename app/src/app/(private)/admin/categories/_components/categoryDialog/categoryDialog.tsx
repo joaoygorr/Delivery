@@ -1,10 +1,11 @@
 "use client";
 import createCategoryFormSchema from "@/shared/schemas/categoryForm";
-import { categoryFormData } from "@/shared/types/types";
+import { CategoryFormData } from "@/shared/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -18,9 +19,9 @@ import { useForm } from "react-hook-form";
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSave: (event: categoryFormData) => void;
+  onSave: (event: CategoryFormData) => void;
   disable: boolean;
-  category?: categoryFormData;
+  category?: CategoryFormData;
 };
 
 export default function CategoryDialog({
@@ -35,7 +36,7 @@ export default function CategoryDialog({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<categoryFormData>({
+  } = useForm<CategoryFormData>({
     resolver: zodResolver(createCategoryFormSchema),
   });
 
@@ -74,7 +75,7 @@ export default function CategoryDialog({
               Cancelar
             </Button>
             <Button type="submit" disabled={disable}>
-              Salvar
+              {disable ? <CircularProgress size={20} /> : "Salvar"}
             </Button>
           </Box>
         </Box>

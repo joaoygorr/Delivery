@@ -4,18 +4,18 @@ import "./confirm.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import createAuthFormSchema from "@/shared/schemas/authForm";
-import { authFormData } from "@/shared/types/types";
+import { AuthFormData } from "@/shared/types/types";
 
 export default function Page() {
   const {
     register,
     handleSubmit,
     formState: { errors, isLoading },
-  } = useForm<authFormData>({
+  } = useForm<AuthFormData>({
     resolver: zodResolver(createAuthFormSchema),
   });
 
-  function submitConfirm(data: authFormData) {
+  function submitConfirm(data: AuthFormData) {
     // TODO: envio do furmolário de login
   }
 

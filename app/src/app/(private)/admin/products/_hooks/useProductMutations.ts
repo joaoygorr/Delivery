@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { productFormData } from "@/shared/types/types";
+import { ProductFormData } from "@/shared/types/types";
 import { productApi } from "@/shared/api/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -9,11 +9,11 @@ export const useProductMutations = () => {
     const queryClient = useQueryClient();
 
     const createProductMutation = useMutation({
-        mutationFn: (data: productFormData) => productApi.createProduct(data),
+        mutationFn: (data: ProductFormData) => productApi.createProduct(data),
         onSuccess: (newProduct) => {
             const category = newProduct.data;
 
-            queryClient.setQueryData<IPagedResponse<productFormData[]>>(
+            queryClient.setQueryData<IPagedResponse<ProductFormData[]>>(
                 ["pruducts"],
                 (oldData) => {
                     if (oldData) {

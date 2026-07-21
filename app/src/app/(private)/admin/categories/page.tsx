@@ -2,6 +2,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -11,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import CategoryDialog from "@/app/(private)/admin/categories/_components/categoryDialog/categoryDialog";
-import { categoryFormData } from "@/shared/types/types";
+import { CategoryFormData } from "@/shared/types/types";
 import { categoryApi } from "@/shared/api/api";
 import CategoryTableItem from "@/app/(private)/admin/categories/_components/categoryTableItems/categoryTableItems";
 import { useQuery } from "@tanstack/react-query";
@@ -21,12 +22,12 @@ import { useCategoryMutations } from "@/app/(private)/admin/categories/_hooks/us
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [categoryToEdit, setCategoryToEdit] = useState<categoryFormData>();
+  const [categoryToEdit, setCategoryToEdit] = useState<CategoryFormData>();
   const { createCategoryMutation, updateCategoryMutation,
     deleteCategoryMutation
   } = useCategoryMutations();
 
-  function handleSaveEditDialog(data: categoryFormData) {
+  function handleSaveEditDialog(data: CategoryFormData) {
     if (categoryToEdit) {
       handleEdit(data);
     } else {
@@ -34,12 +35,12 @@ export default function Page() {
     }
   }
 
-  const { data: categories } = useQuery<IPagedResponse<categoryFormData[]>>({
+  const { data: categories, isLoading: isLoadingCategories } = useQuery<IPagedResponse<CategoryFormData[]>>({
     queryKey: ["categories"],
     queryFn: () => categoryApi.getCategories(),
   });
 
-  const handleSave = async (data: categoryFormData) => {
+  const handleSave = async (data: CategoryFormData) => {
     setLoading(true);
     try {
       await createCategoryMutation.mutateAsync(data);
@@ -49,7 +50,7 @@ export default function Page() {
     }
   };
 
-  const handleEdit = (data: categoryFormData) => {
+  const handleEdit = (data: CategoryFormData) => {
     updateCategoryMutation.mutate(data, {
       onSuccess: () => {
         setOpenDialog(false);
@@ -62,12 +63,12 @@ export default function Page() {
     setOpenDialog(true);
   };
 
-  const handleEditCategory = (category: categoryFormData) => {
+  const handleEditCategory = (category: CategoryFormData) => {
     setCategoryToEdit(category);
     setOpenDialog(true);
   };
 
-  const handleDeleteCategory = async (data: categoryFormData) => {
+  const handleDeleteCategory = async (data: CategoryFormData) => {
     if (!data.id) return;
     await deleteCategoryMutation.mutateAsync(data.id);
   };
@@ -91,14 +92,22 @@ export default function Page() {
         </TableHead>
 
         <TableBody>
-          {categories?.content?.map((item) => (
-            <CategoryTableItem
-              key={item.id}
-              item={item}
-              onDelete={handleDeleteCategory}
-              onEdit={handleEditCategory}
-            />
-          ))}
+          {isLoadingCategories ? (
+            <TableRow>
+              <TableCell colSpan={3} align="center" sx={{ py: 4 }}>
+                <CircularProgress size={30} />
+              </TableCell>
+            </TableRow>
+          ) : (
+            categories?.content?.map((item) => (
+              <CategoryTableItem
+                key={item.id}
+                item={item}
+                onDelete={handleDeleteCategory}
+                onEdit={handleEditCategory}
+              />
+            ))
+          )}
         </TableBody>
       </Table>
 

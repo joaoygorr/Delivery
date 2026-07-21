@@ -2,6 +2,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   TextField,
   Typography,
   Link as MuiLink,
@@ -17,7 +18,7 @@ import { authApi } from "@/shared/api/api";
 import Link from "next/link";
 import ForgotPassword from "@/app/(auth)/login/_components/forgotPassword";
 import { useState } from "react";
-import { authFormData } from "@/shared/types/types";
+import { AuthFormData } from "@/shared/types/types";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -27,7 +28,7 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<authFormData>({
+  } = useForm<AuthFormData>({
     resolver: zodResolver(createAuthFormSchema),
   });
 
@@ -35,7 +36,7 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  async function submitLogin(data: authFormData) {
+  async function submitLogin(data: AuthFormData) {
     setLoading(true);
     try {
       await authApi.login(data);
@@ -121,7 +122,7 @@ export default function Page() {
         <ForgotPassword open={open} handleClose={setOpen} />
 
         <Button type="submit" variant="contained" fullWidth disabled={loading}>
-          entrar
+          {loading ? <CircularProgress size={20} color="inherit" /> : "entrar"}
         </Button>
 
         <MuiLink

@@ -1,11 +1,11 @@
-import { productFormData } from "@/shared/types/types";
-import { Box, Button, TableCell, TableRow } from "@mui/material";
+import { ProductFormData } from "@/shared/types/types";
+import { Box, IconButton, TableCell, TableRow } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
 type Props = {
-    item: productFormData;
-    onEdit: (item: productFormData) => void;
-    onDelete: (item: productFormData) => void;
+    item: ProductFormData;
+    onEdit: (item: ProductFormData) => void;
+    onDelete: (item: ProductFormData) => void;
 };
 
 export default function ProductTableItem({ item, onDelete, onEdit }: Props) {
@@ -30,12 +30,12 @@ export default function ProductTableItem({ item, onDelete, onEdit }: Props) {
             <TableCell>categoria</TableCell>
 
             <TableCell>
-                <Button onClick={() => onEdit(item)} size="small">
+                <IconButton onClick={() => onEdit(item)} size="small" aria-label="Editar produto">
                     <Edit />
-                </Button>
-                <Button onClick={() => onDelete(item)} size="small">
+                </IconButton>
+                <IconButton onClick={() => onDelete(item)} size="small" aria-label="Excluir produto">
                     <Delete />
-                </Button>
+                </IconButton>
             </TableCell>
         </TableRow>
     );

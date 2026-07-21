@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { authFormData, categoryFormData, productFormData } from "../types/types";
+import { AuthFormData, CategoryFormData, ProductFormData } from "../types/types";
 import { IResponse } from "../types/IResponse";
 import { IPagedResponse } from "../types/IPagedResponse";
 
@@ -39,19 +39,19 @@ export class Api {
         document.cookie = `token=${token}; path=/; secure; samesite=strict;`;
     }
 
-    async login(user: authFormData): Promise<{ userName: string, token: string }> {
+    async login(user: AuthFormData): Promise<{ userName: string, token: string }> {
         const res = await this.api.post("/login", user);
         this.verifyToken(res?.data?.token);
         return res?.data
     }
 
-    async register(newUser: authFormData): Promise<{ userName: string, token: string }> {
+    async register(newUser: AuthFormData): Promise<{ userName: string, token: string }> {
         const res = await this.api.post("/register", newUser);
         this.verifyToken(res?.data?.token);
         return res.data;
     }
 
-    async createProduct(product: FormData): Promise<productFormData> {
+    async createProduct(product: FormData): Promise<ProductFormData> {
         return await this.api.post("/", product, {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -59,22 +59,22 @@ export class Api {
         });
     }
 
-    async getProducts(): Promise<IPagedResponse<productFormData[]>> {
+    async getProducts(): Promise<IPagedResponse<ProductFormData[]>> {
         const response = await this.api.get("");
         return response.data;
     }
 
     //CATEGORIES
-    async createCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
+    async createCategory(category: CategoryFormData): Promise<IResponse<CategoryFormData>> {
         return await this.api.post("", category);
     }
 
-    async getCategories(): Promise<IPagedResponse<categoryFormData[]>> {
+    async getCategories(): Promise<IPagedResponse<CategoryFormData[]>> {
         const response = await this.api.get("");
         return response.data;
     }
 
-    async updateCategory(category: categoryFormData): Promise<IResponse<categoryFormData>> {
+    async updateCategory(category: CategoryFormData): Promise<IResponse<CategoryFormData>> {
         return await this.api.put(`/${Number(category.id)}`, category);
     }
 

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -21,18 +22,18 @@ import {
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import {
-  categoryFormData,
-  productFormData,
+  CategoryFormData,
+  ProductFormData,
 } from "@/shared/types/types";
 import FormatValor from "@/shared/utils/priceMask";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSave: (event: productFormData) => void;
+  onSave: (event: ProductFormData) => void;
   disable: boolean;
-  categories: categoryFormData[];
-  product?: productFormData
+  categories: CategoryFormData[];
+  product?: ProductFormData
 };
 
 export default function ProductDialog({
@@ -50,7 +51,7 @@ export default function ProductDialog({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<productFormData>({
+  } = useForm<ProductFormData>({
     resolver: zodResolver(createProductFormSchema),
   });
 
@@ -204,7 +205,7 @@ export default function ProductDialog({
               Cancelar
             </Button>
             <Button type="submit" disabled={disable}>
-              Salvar
+              {disable ? <CircularProgress size={20} /> : "Salvar"}
             </Button>
           </Box>
         </Box>

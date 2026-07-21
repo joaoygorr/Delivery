@@ -2,6 +2,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   TextField,
   Typography,
   Link as MuiLink,
@@ -16,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/shared/api/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authFormData } from "@/shared/types/types";
+import { AuthFormData } from "@/shared/types/types";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -29,11 +30,11 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<authFormData>({
+  } = useForm<AuthFormData>({
     resolver: zodResolver(createAuthFormSchema),
   });
 
-  async function submitRegister(data: authFormData) {
+  async function submitRegister(data: AuthFormData) {
     setLoading(true);
     try {
       await authApi.register(data);
@@ -146,7 +147,7 @@ export default function Page() {
         </FormControl>
 
         <Button type="submit" variant="contained" fullWidth disabled={loading}>
-          registrar
+          {loading ? <CircularProgress size={20} color="inherit" /> : "registrar"}
         </Button>
       </Box>
 
