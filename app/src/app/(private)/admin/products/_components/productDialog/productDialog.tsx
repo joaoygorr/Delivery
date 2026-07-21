@@ -24,7 +24,7 @@ import {
   categoryFormData,
   productFormData,
 } from "@/shared/types/types";
-import handlePriceChange from "@/shared/utils/priceMask";
+import FormatValor from "@/shared/utils/priceMask";
 
 type Props = {
   open: boolean;
@@ -152,7 +152,7 @@ export default function ProductDialog({
               disabled={disable}
               color={errors?.price ? "error" : "primary"}
               {...register("price", {
-                onChange: handlePriceChange,
+                onChange: FormatValor,
               })}
               helperText={errors.price?.message}
             />
