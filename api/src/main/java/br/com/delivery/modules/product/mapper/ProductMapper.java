@@ -26,7 +26,7 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
 
     @Override
     @Mapping(target = "image", ignore = true)
-    @Mapping(target = "imageUrl", expression = "java(mapImageUrl(entity))")
+    @Mapping(target = "imageUrl", source = "image", qualifiedByName = "mapImageUrl")
     @Mapping(source = "category", target = "categoryId")
     public abstract ProductDTO toDto(Product entity);
 
@@ -40,10 +40,11 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
         return category != null ? category.getId() : null;
     }
 
-    protected String mapImageUrl(Product entity) {
-        if (entity.getImage() == null) return null;
-        if (entity.getImage().isFromUrl()) {
-            return entity.getImage().getUrlImage();
+    @Named("mapImageUrl")
+    public String mapImageUrl(Image image) {
+        if (image == null) return null;
+        if (image.isFromUrl()) {
+            return image.getUrlImage();
         }
         return null;
     }
