@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductSizeRepository productSizeRepository;
     private final ProductMapper productMapper;
 
-    @Transactional
     @Override
+    @Transactional
     public void deleteProduct(Long idProduct) {
         if (productSizeRepository.existsByProductId(idProduct)) {
             throw new Exception400("Não é possível excluir o produto porque existem tamanhos de produtos vinculados.");
@@ -36,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTO createProduct(ProductDTO dto) {
         Product entity = new Product();
         productMapper.toEntity(dto, entity);
