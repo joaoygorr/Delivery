@@ -16,8 +16,9 @@ public class ProductDTO extends DtoBase {
     @NotBlank(message = "Nome não pode estar vazio")
     private String name;
 
-    @NotNull(message = "Imagem não pode estar vazia")
-    private MultipartFile img;
+    private MultipartFile image;
+
+    private String imageUrl;
 
     @NotNull(message = "Preço não pode estar vazio")
     private BigDecimal price;

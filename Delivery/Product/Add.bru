@@ -5,8 +5,8 @@ meta {
 }
 
 post {
-  url: {{URL}}/product
-  body: json
+  url: {{URL}}/product/create
+  body: multipartForm
   auth: inherit
 }
 
@@ -14,10 +14,12 @@ headers {
   Authorization: {{TOKEN}}
 }
 
-body:json {
-  {
-    "name": "teste"
-  }
+body:multipart-form {
+  name: teste @contentType(multipart/form-data)
+  description: teste @contentType(multipart/form-data)
+  price: 5 @contentType(multipart/form-data)
+  categoryId: 5 @contentType(multipart/form-data)
+  imageUrl: teste @contentType(multipart/form-data)
 }
 
 settings {

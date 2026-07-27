@@ -2,6 +2,8 @@ package br.com.delivery.modules.product;
 
 import br.com.delivery.configuration.exceptions.Exception400;
 import br.com.delivery.configuration.exceptions.Exception404;
+import br.com.delivery.modules.product.dtos.ProductDTO;
+import br.com.delivery.modules.product.mapper.ProductMapper;
 import br.com.delivery.modules.productSize.ProductSizeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductSizeRepository productSizeRepository;
+    private final ProductMapper productMapper;
 
     @Transactional
     @Override
@@ -30,5 +33,12 @@ public class ProductServiceImpl implements ProductService {
             throw new Exception400("O ID do produto é obrigatório.");
         }
         return productRepository.findById(idProduct).orElseThrow(() -> new Exception404("Produto não encontrado."));
+    }
+
+    @Override
+    public ProductDTO createProduct(ProductDTO dto) {
+        Product entity = new Product();
+        productMapper.toEntity(dto, entity);
+        return productMapper.toDto(productRepository.save(entity));
     }
 }

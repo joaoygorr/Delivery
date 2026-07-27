@@ -25,7 +25,11 @@ public class Image implements Serializable {
 
     private String type;
 
-    private Integer size;
+    private long size;
+
+    public Image (String urlImage) {
+        this.urlImage = urlImage;
+    }
 
     public boolean isFromUrl() {
         return urlImage != null && !urlImage.isBlank();
