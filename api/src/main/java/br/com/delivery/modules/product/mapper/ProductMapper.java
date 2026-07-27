@@ -21,12 +21,17 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
 
     @Override
     @Mapping(source = "categoryId", target = "category")
+    @Mapping(target = "image", ignore = true)
     public abstract void toEntity(ProductDTO dto, @MappingTarget Product entity);
 
     @Override
+    @Mapping(target = "image", ignore = true)
+    @Mapping(target = "imageUrl", expression = "java(mapImageUrl(entity))")
+    @Mapping(source = "category", target = "categoryId")
     public abstract ProductDTO toDto(Product entity);
 
     Category mapCategory(Long id) {
+        if (id == null) return null;
         return this.categoryRepository.findById(id)
                 .orElseThrow(() -> new Exception404(String.format("Categoria com ID %d não encontrada", id)));
     }
@@ -35,24 +40,25 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
         return category != null ? category.getId() : null;
     }
 
-    Image mapImage(MultipartFile file) {
-        try {
-            return new Image(null, file.getBytes(), file.getOriginalFilename(), file.getContentType(),
-                    file.getSize());
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao converter imagem", e);
+    protected String mapImageUrl(Product entity) {
+        if (entity.getImage() == null) return null;
+        if (entity.getImage().isFromUrl()) {
+            return entity.getImage().getUrlImage();
         }
-    }
-
-    MultipartFile mapMultiparFIle(Image img) {
-        return img
+        return null;
     }
 
     @AfterMapping
-    protected void mapImage(ProductDTO dto, @MappingTarget Product entity) {
+    protected void handleImage(ProductDTO dto, @MappingTarget Product entity) {
         if (dto.getImage() != null && !dto.getImage().isEmpty()) {
-            entity.setImage(mapImage(dto.getImage()));
-        } else if (dto.getImageUrl() != null) {
+            try {
+                MultipartFile file = dto.getImage();
+                entity.setImage(new Image(null, file.getBytes(), file.getOriginalFilename(),
+                        file.getContentType(), file.getSize()));
+            } catch (IOException e) {
+                throw new RuntimeException("Erro ao converter imagem", e);
+            }
+        } else if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
             entity.setImage(new Image(dto.getImageUrl()));
         }
     }
