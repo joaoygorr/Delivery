@@ -51,12 +51,27 @@ export class Api {
         return res.data;
     }
 
+    //PRODUCTS
+    async updateProduct(id: number, product: FormData): Promise<ProductFormData> {
+        const response = await this.api.put<ProductFormData>(
+            `/${id}`,
+            product,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        return response.data;
+    }
+
     async createProduct(product: FormData): Promise<ProductFormData> {
-        return await this.api.post("/", product, {
+        const response = await this.api.post("/", product, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
+        return response.data;
     }
 
     async getProducts(): Promise<IPagedResponse<ProductFormData[]>> {

@@ -22,27 +22,27 @@ import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { IPagedResponse } from "@/shared/types/IPagedResponse";
 import ProductTableItem from "@/app/(private)/admin/products/_components/productTableItems/productTableItem";
+import { useProductMutations } from "./_hooks/useProductMutations";
 
 export default function Page() {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<CategoryFormData[]>([]);
   const [productToEdit, setProductToEdit] = useState<ProductFormData>();
+  const { createProductMutation,
+    deleteProductMutation,
+    updateProductMutation
+  } = useProductMutations();
 
   function teste(data: ProductFormData) {
     if (productToEdit) {
-      handleEditProduct(data);
+      handleEdit(data);
     } else {
       handleSave(data);
     }
   }
 
-  const handleSave = async (data: ProductFormData) => {
-    setLoading(true);
-  }
-
-
-  async function handleSaveEditDialog(data: ProductFormData) {
+  async function handleSave(data: ProductFormData) {
     setLoading(true);
     try {
       const formData = new FormData();
@@ -74,8 +74,8 @@ export default function Page() {
         }
       });
 
-      await productApi.createProduct(formData);
-      toast.success("Produto cadastrado com sucesso!");
+      await createProductMutation.mutateAsync(formData);
+
       setOpenDialog(false);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -84,6 +84,14 @@ export default function Page() {
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleEdit = (data: ProductFormData) => {
+    updateProductMutation.mutate(data, {
+      onSuccess: () => {
+        setOpenDialog(false);
+      }
+    })
   }
 
   const { data: products, isLoading: isLoadingProducts } = useQuery<IPagedResponse<ProductFormData[]>>({
@@ -113,15 +121,7 @@ export default function Page() {
 
   const handleDeleteProduct = async (data: ProductFormData) => {
     if (!data.id) return;
-
-    try {
-      await productApi.deleteObject(data.id);
-      toast.success("Produto excluída com sucesso");
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.error || error.message);
-      }
-    }
+    await deleteProductMutation.mutateAsync(data.id);
   };
 
   return (
