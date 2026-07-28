@@ -1,6 +1,9 @@
 package br.com.delivery.modules.product.dtos;
 
 import br.com.delivery.modules.crud.DtoBase;
+import br.com.delivery.modules.crud.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -11,14 +14,18 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDTO extends DtoBase {
 
     @NotBlank(message = "Nome não pode estar vazio")
     private String name;
 
-    private MultipartFile image;
+    @JsonIgnore
+    private MultipartFile imageFile;
 
     private String imageUrl;
+
+    private Image image;
 
     @NotNull(message = "Preço não pode estar vazio")
     private BigDecimal price;
