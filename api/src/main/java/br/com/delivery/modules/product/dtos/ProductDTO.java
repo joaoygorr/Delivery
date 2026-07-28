@@ -1,7 +1,6 @@
 package br.com.delivery.modules.product.dtos;
 
 import br.com.delivery.modules.crud.DtoBase;
-import br.com.delivery.modules.crud.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
@@ -21,11 +20,9 @@ public class ProductDTO extends DtoBase {
     private String name;
 
     @JsonIgnore
-    private MultipartFile imageFile;
+    private transient MultipartFile imageFile;
 
     private String imageUrl;
-
-    private Image image;
 
     @NotNull(message = "Preço não pode estar vazio")
     private BigDecimal price;
@@ -34,4 +31,8 @@ public class ProductDTO extends DtoBase {
 
     @NotNull(message = "Categoria não pode estar vazia")
     private Long categoryId;
+
+    private String imageName;
+
+    private String imageType;
 }

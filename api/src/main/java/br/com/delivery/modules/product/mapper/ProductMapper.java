@@ -27,6 +27,8 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
     @Override
     @Mapping(target = "imageFile", ignore = true)
     @Mapping(target = "imageUrl", ignore = true)
+    @Mapping(target = "imageName", ignore = true)
+    @Mapping(target = "imageType", ignore = true)
     @Mapping(source = "category", target = "categoryId")
     public abstract ProductDTO toDto(Product entity);
 
@@ -57,6 +59,18 @@ public abstract class ProductMapper implements DtoMapper<Product, ProductDTO> {
             }
         } else if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
             entity.setImage(new Image(dto.getImageUrl()));
+        }
+    }
+
+    @AfterMapping
+    protected void mapImageMetadata(Product entity, @MappingTarget ProductDTO dto) {
+        Image img = entity.getImage();
+        if (img != null) {
+            dto.setImageName(img.getName());
+            dto.setImageType(img.getType());
+            if (img.isFromUrl()) {
+                dto.setImageUrl(img.getUrlImage());
+            }
         }
     }
 }
