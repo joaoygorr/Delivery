@@ -32,6 +32,8 @@ public class ProductDTO extends DtoBase {
     @NotNull(message = "Categoria não pode estar vazia")
     private Long categoryId;
 
+    private String categoryName;
+
     private String imageName;
 
     private String imageType;

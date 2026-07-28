@@ -23,7 +23,11 @@ const createProductFormSchema = z.object({
         .transform(desc => {
             return desc.trim().charAt(0).toLocaleUpperCase() + desc.slice(1);
         }),
-    categoryId: z.number().min(1, "A categoria é obrigatória")
+    categoryId: z.number().min(1, "A categoria é obrigatória"),
+    categoryName: z.string().optional(),
+    imageName: z.string().optional(),
+    imageType: z.string().optional(),
+    imageUrl: z.string().optional(),
 })
 
 export default createProductFormSchema; 

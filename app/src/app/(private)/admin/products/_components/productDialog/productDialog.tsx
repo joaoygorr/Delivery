@@ -184,12 +184,10 @@ export default function ProductDialog({
               variant="standard"
               fullWidth
               disabled={disable}
+              defaultValue={product?.categoryId ?? ""}
               error={!!errors.categoryId}
               {...register("categoryId")}
             >
-              {product?.categoryId && (<MenuItem key={product.categoryId.id} value={product.categoryId.name}>
-                {product.categoryId.name}
-              </MenuItem>)}
               {categories?.map((category) => (
                 <MenuItem key={category.id} value={category.id}>
                   {category.name}

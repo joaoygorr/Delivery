@@ -26,8 +26,8 @@ export default function ProductTableItem({ item, onDelete, onEdit }: Props) {
                 />
             </TableCell>
             <TableCell>{item.name}</TableCell>
-            <TableCell>{ }</TableCell>
-            <TableCell>categoria</TableCell>
+            <TableCell>{item.price}</TableCell>
+            <TableCell>{item.categoryName}</TableCell>
 
             <TableCell>
                 <IconButton onClick={() => onEdit(item)} size="small" aria-label="Editar produto">
