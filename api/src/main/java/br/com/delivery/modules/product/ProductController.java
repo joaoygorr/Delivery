@@ -32,6 +32,6 @@ public class ProductController extends CrudController<Product, ProductRepository
 
     @PostMapping("/create")
     public ResponseEntity<ProductDTO> createProduct(@ModelAttribute @Valid ProductDTO dto) {
-        return ResponseEntity.ok(productService.createProduct(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(dto));
     }
 }
